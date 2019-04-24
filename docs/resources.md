@@ -4,7 +4,7 @@
 
 | Resource | Description |
 | --- | --- |
-| Australian Bureau of Statistics, 4364.0.55.001 | 'National Health Survey: First Results, 2017-18. Released at 11:30 AM (CANBERRA TIME) 27/03/2019.' |
+| Australian Bureau of Statistics, [4364.0.55.001 - National Health Survey: First Results, 2017-18](https://www.abs.gov.au/AUSSTATS/abs@.nsf/Lookup/4364.0.55.001Main+Features100012017-18?OpenDocument) | Released at 11:30 AM (CANBERRA TIME) 27/03/2019. Contains several spreadsheets available under the _'Downloads'_ tab, spanning a range of topics related to health conditions and behaviours. |
 
 ## Cleaning and wrangling data
 
