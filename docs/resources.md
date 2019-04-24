@@ -20,6 +20,8 @@
 
 - Stack Overflow: ['How to fill NAs with LOCF by factors in data frame'](https://stackoverflow.com/questions/13616965/how-to-fill-nas-with-locf-by-factors-in-data-frame-split-by-country)
 
+- Stack Overflow: ['Mutate multiple columns in a dataframe'](https://stackoverflow.com/questions/26219501/mutate-multiple-columns-in-a-dataframe)
+
 ## Creating the presentation
 
 - `xaringan` R package: [GitHub repo](https://github.com/yihui/xaringan).
