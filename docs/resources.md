@@ -8,6 +8,10 @@
 
 ## Creating the presentation
 
+| Resource | Description |
+| --- | --- |
+| `xaringan` R package by Yihui Xie: [GitHub repo](https://github.com/yihui/xaringan). | Create presentations in R using R Markdown & remark.js |
+
 - `xaringan` R package by Yihui Xie: [GitHub repo](https://github.com/yihui/xaringan).
 
   Create presentations in R using R Markdown & remark.js
