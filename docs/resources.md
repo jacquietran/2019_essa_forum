@@ -13,6 +13,12 @@
 
   Import Excel spreadsheets into R.  
   Authors: Hadley Wickham, Jenny Bryan.
+  
+- Data Science Made Simple: [Select variables in R using dplyr](http://www.datasciencemadesimple.com/select-variables-columns-r-using-dplyr-select-function/)
+
+- Stack Overflow: ['Replace all 0 values to NA'](https://stackoverflow.com/questions/11036989/replace-all-0-values-to-na)
+
+- Stack Overflow: ['How to fill NAs with LOCF by factors in data frame'](https://stackoverflow.com/questions/13616965/how-to-fill-nas-with-locf-by-factors-in-data-frame-split-by-country)
 
 ## Creating the presentation
 
