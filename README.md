@@ -12,4 +12,4 @@ My aim is to encourage exercise and sport professionals to think creatively abou
 
 ## About me
 
-![](images/about_me.png)
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/about_me.PNG)
