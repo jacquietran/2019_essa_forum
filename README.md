@@ -9,3 +9,7 @@ How can analytics be applied to better understand our clients, our patients, our
 This presentation will provide a window into how analytics is used in exercise and sport settings. I will showcase real-world examples that  are relevant to exercise and sport contexts, share my experiences with applying data analytics in elite sport, and highlight opportunities for growth in exercise and sport analytics.
 
 My aim is to encourage exercise and sport professionals to think creatively about the place and purpose of data in their daily work, and actively integrate analytical thinking and analytical methods in their workplaces.
+
+## About me
+
+![](images/about_me.png)
