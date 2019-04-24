@@ -1,5 +1,13 @@
 # Resources
 
-- `xaringan` R package by Yihui Xie: [GitHub repo](https://github.com/yihui/xaringan)
+`xaringan` R package by Yihui Xie: [GitHub repo](https://github.com/yihui/xaringan)
 
-- `xaringanthemer` R package by Garrick Aden-Buie: [GitHub repo](https://github.com/gadenbuie/xaringanthemer)
+- Create presentations in R using R Markdown & remark.js
+
+`xaringanthemer` R package by Garrick Aden-Buie: [GitHub repo](https://github.com/gadenbuie/xaringanthemer)
+
+- Apply and modify `xaringan` presentation themes
+
+`ghibli` R package by Ewen Henderson: [GitHub repo](https://github.com/ewenme/ghibli)
+
+- Colour palettes based on Studio Ghibli movies
