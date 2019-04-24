@@ -3,7 +3,7 @@
 ## Data sources
 
 | Type | Resource | Author(s) | Description |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | Data source | [4364.0.55.001 - National Health Survey: First Results, 2017-18](https://www.abs.gov.au/AUSSTATS/abs@.nsf/Lookup/4364.0.55.001Main+Features100012017-18?OpenDocument) | Australian Bureau of Statistics | Released at 11:30 AM (CANBERRA TIME) 27/03/2019. Contains several spreadsheets available under the _'Downloads'_ tab, spanning a range of topics related to health conditions and behaviours. |
 | Presentations | `xaringan` R package: [GitHub repo](https://github.com/yihui/xaringan). | Yihui Xie | Create presentations in R using R Markdown & remark.js |
 | Presentations |`xaringanthemer` R package: [GitHub repo](https://github.com/gadenbuie/xaringanthemer). | Garrick Aden-Buie | Apply and modify `xaringan` presentation themes |
