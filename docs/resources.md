@@ -1,7 +1,5 @@
 # Resources
 
-## Data sources
-
 | Type | Resource | Author(s) | Description |
 | --- | --- | --- | --- |
 | Data source | [4364.0.55.001 - National Health Survey: First Results, 2017-18](https://www.abs.gov.au/AUSSTATS/abs@.nsf/Lookup/4364.0.55.001Main+Features100012017-18?OpenDocument) | Australian Bureau of Statistics | Contains several spreadsheets that span a range of health-related topics. |
