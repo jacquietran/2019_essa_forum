@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Data analytics in exercise and sport</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="@jacquietran — ESSA Forum, 4 May 2019" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Data analytics in exercise and sport
+## <br />Dr Jacquie Tran
+### <span class="citation">@jacquietran</span> — ESSA Forum, 4 May 2019
+
+---
+
+
+
+
+
+
+class: inverse, center, bottom
+
+# 'Start with the end in mind.'
+
+---
+
+&lt;br /&gt;
+&lt;br /&gt;
+
+What is the decision in need of evidence?
+
+--
+
+How will you make the decision with no additional information?
+
+--
+
+How would you make the decision if you had access to any information you wanted?
+
+--
+
+Can you get access to all the data you ideally want to make your decision?
+
+--
+
+What mistakes are you willing to live with?
+
+--
+
+.footnote[
+
+[1] Argyris, 1976, ['Single-loop and double-loop models in research on decision-making'](http://academic.udayton.edu/richardghere/igo%20ngo%20research/argyris.pdf), _Administrative Science Quarterly_
+
+[2] Byrne, 2018, ['Why Google defind a new discipline to help humans make decisions'](https://www.fastcompany.com/90203073/why-google-defined-a-new-discipline-to-help-humans-make-decisions), _Fast Company_
+
+]
+
+---
+class: inverse, center, bottom
+
+# Working with data // Coding with data
+
+---
+
+# Excel: Its power and its pitfalls
+
+--
+
+1. Data, analysis outputs, and visualisation are stored in one place.
+
+--
+
+2. Data is easily manipulated - high risk of introducing errors.
+
+--
+
+3. Point-and-click interface - manual repetition!
+
+--
+
+4. Actions are not logged by default.
+
+--
+
+5. Slow when working with large data sets or files storing many computations.
+
+--
+
+6. Complicated workbooks can 'break' when shared with others.
+
+---
+
+# The case for coding
+
+--
+
+1. Separation of data, analysis outputs, visualisations, and reports.
+
+--
+
+2. Reproducible, transparent, and less error-prone workflow.
+
+--
+
+3. Coding methods are faster for repetitive actions than point-and-click.
+
+--
+
+4. Procedures are documented via scripts and command history.
+
+--
+
+5. Build your own library of frequently used analytical procedures - or use and adapt libraries created by open source developers!
+
+---
+class: inverse, center, bottom
+
+# Data analytics in exercise and sport
+
+## A worked example
+
+---
+
+# Section subheader
+
+Slide body text
+
+
+```r
+# Some code I put here for aesthetic purposes ----------------------------------
+
+devtools::install_github("yihui/xaringan")
+```
+
+---
+class: inverse, center, bottom
+
+# Developing data proficiency
+
+---
+class: center, middle
+
+# Thanks!
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

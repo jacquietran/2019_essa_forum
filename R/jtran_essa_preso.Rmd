@@ -1,0 +1,173 @@
+---
+title: "Data analytics in exercise and sport"
+subtitle: "<br />Dr Jacquie Tran"
+author: "@jacquietran --- ESSA Forum, 4 May 2019"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+```{r setup, include=FALSE}
+
+options(htmltools.dir.version = FALSE)
+
+# Load libraries ---------------------------------------------------------------
+
+library(here)
+library(ghibli)
+library(xaringanthemer)
+
+```
+
+```{r xaringan_themer, include = FALSE}
+
+mono_light(
+  base_color = ghibli_palette("MononokeDark")[3],
+  header_font_google = google_font("Amatic SC", "400b"),
+  header_h1_font_size = "80px",
+  header_h2_font_size = "60px",
+  header_h3_font_size = "50px",
+  header_font_weight = "bold",
+  text_font_google   = google_font("Montserrat", "400", "400i", "400b"),
+  text_font_size = "26px",
+  code_font_google   = google_font("Droid Mono"),
+  padding = "0em 2em 1em 2em",
+  footnote_color = "#666666",
+  footnote_font_size = "0.5em",
+  footnote_position_bottom = "0.5em"
+)
+
+```
+
+class: inverse, center, bottom
+
+# 'Start with the end in mind.'
+
+---
+
+<br />
+<br />
+
+What is the decision in need of evidence?
+
+--
+
+How will you make the decision with no additional information?
+
+--
+
+How would you make the decision if you had access to any information you wanted?
+
+--
+
+Can you get access to all the data you ideally want to make your decision?
+
+--
+
+What mistakes are you willing to live with?
+
+--
+
+.footnote[
+
+[1] Argyris, 1976, ['Single-loop and double-loop models in research on decision-making'](http://academic.udayton.edu/richardghere/igo%20ngo%20research/argyris.pdf), _Administrative Science Quarterly_
+
+[2] Byrne, 2018, ['Why Google defind a new discipline to help humans make decisions'](https://www.fastcompany.com/90203073/why-google-defined-a-new-discipline-to-help-humans-make-decisions), _Fast Company_
+
+]
+
+---
+class: inverse, center, bottom
+
+# Working with data // Coding with data
+
+---
+
+# Excel: Its power and its pitfalls
+
+--
+
+1. Data, analysis outputs, and visualisation are stored in one place.
+
+--
+
+2. Data is easily manipulated - high risk of introducing errors.
+
+--
+
+3. Point-and-click interface - manual repetition!
+
+--
+
+4. Actions are not logged by default.
+
+--
+
+5. Slow when working with large data sets or files storing many computations.
+
+--
+
+6. Complicated workbooks can 'break' when shared with others.
+
+---
+
+# The case for coding
+
+--
+
+1. Separation of data, analysis outputs, visualisations, and reports.
+
+--
+
+2. Reproducible, transparent, and less error-prone workflow.
+
+--
+
+3. Coding methods are faster for repetitive actions than point-and-click.
+
+--
+
+4. Procedures are documented via scripts and command history.
+
+--
+
+5. Build your own library of frequently used analytical procedures - or use and adapt libraries created by open source developers!
+
+---
+class: inverse, center, bottom
+
+# Data analytics in exercise and sport
+
+## A worked example
+
+---
+
+# Section subheader
+
+Slide body text
+
+```{r eval = FALSE, tidy = FALSE}
+
+# Some code I put here for aesthetic purposes ----------------------------------
+
+devtools::install_github("yihui/xaringan")
+
+```
+
+---
+class: inverse, center, bottom
+
+# Developing data proficiency
+
+---
+class: center, middle
+
+# Thanks!
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
