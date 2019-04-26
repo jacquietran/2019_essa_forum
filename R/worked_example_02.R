@@ -1,4 +1,7 @@
 # Worked example from my presentation at the 2019 ESSA Forum
+# Data set from the Australian Bureau of Statistics
+
+# https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/4364.0.55.0012017-18?OpenDocument
 
 # Load libraries ---------------------------------------------------------------
 
@@ -9,16 +12,12 @@ library(ggplot2)
 
 # Import data ------------------------------------------------------------------
 
-# Data sourced from:
-# https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/4364.0.55.0012017-18?OpenDocument
-
-# This worked example focuses on the data in
+# This worked example focuses on the data in the named sheet:
 # 'Table 13.1 Physical activity, Persons'
 
 source_data <- read_excel(
   here("data/4364055001do013_20172018.xls"),
-  sheet = "Table 13.1_Estimates, persons", range = cell_rows(7:100)
-)
+  sheet = "Table 13.1_Estimates, persons", range = cell_rows(7:100))
 
 # Wrangle data -----------------------------------------------------------------
 
