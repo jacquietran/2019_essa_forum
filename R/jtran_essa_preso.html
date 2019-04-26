@@ -181,6 +181,8 @@ To answer this question, we will use R to create this **data table**...
 &lt;br /&gt;
 ...and this **data plot**!
 
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/demo1_data_plot.png)
+
 ---
 
 ## Import the data
@@ -641,36 +643,146 @@ gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
 
 ---
 
-## Calculate summary statistics
+## Calculate gold medal totals
 
 Now that we have tidied up the data into the format we need, we can calculate the **total number of gold medals** won by **Canada, Norway, and Sweden** at each of the **Winter Games between 1998 and 2014**.
 
 ---
 
-## Calculate summary statistics
+## Calculate gold medal totals
 
 
 ```r
-# The {reshape2} package is useful for manipulating data
-# from long-to-wide format and vice versa
-library(reshape2)
-
 # Calculate total number of gold medals per team per Winter Games
-gold_medal_totals &lt;- gold_medal_comparison %&gt;%
+*gold_medal_totals &lt;- gold_medal_comparison %&gt;%
   group_by(Year, City, Country) %&gt;%
   summarise(gold_medal_total = length(Medal)) %&gt;%
   ungroup()
-
-# Reshape the data from long-to-wide format for tabulating
-gold_medal_totals_wide &lt;- dcast(
-  gold_medal_totals,
-  Year + City ~ Country,
-  value.var = "gold_medal_total")
 ```
 
 ---
 
-## Calculate summary statistics
+## Calculate gold medal totals
+
+
+```r
+# Calculate total number of gold medals per team per Winter Games
+gold_medal_totals &lt;- gold_medal_comparison %&gt;%
+* group_by(Year, City, Country) %&gt;%
+  summarise(gold_medal_total = length(Medal)) %&gt;%
+  ungroup()
+```
+
+---
+
+## Calculate gold medal totals
+
+
+```r
+# Calculate total number of gold medals per team per Winter Games
+gold_medal_totals &lt;- gold_medal_comparison %&gt;%
+  group_by(Year, City, Country) %&gt;%
+* summarise(gold_medal_total = length(Medal)) %&gt;%
+  ungroup()
+```
+
+---
+
+## Calculate gold medal totals
+
+
+```r
+# Calculate total number of gold medals per team per Winter Games
+gold_medal_totals &lt;- gold_medal_comparison %&gt;%
+  group_by(Year, City, Country) %&gt;%
+  summarise(gold_medal_total = length(Medal)) %&gt;%
+* ungroup()
+```
+
+---
+
+## Calculate gold medal totals
+
+When we check the data, we can see it is in long format:
+
+
+```r
+gold_medal_totals
+```
+
+```
+## # A tibble: 13 x 4
+##     Year City           Country gold_medal_total
+##    &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;              &lt;int&gt;
+##  1  1998 Nagano         CAN                    6
+##  2  1998 Nagano         NOR                   10
+##  3  2002 Salt Lake City CAN                    8
+##  4  2002 Salt Lake City NOR                   12
+##  5  2006 Turin          CAN                    7
+##  6  2006 Turin          NOR                    2
+##  7  2006 Turin          SWE                    7
+##  8  2010 Vancouver      CAN                   15
+##  9  2010 Vancouver      NOR                    9
+## 10  2010 Vancouver      SWE                    5
+## 11  2014 Sochi          CAN                   10
+## 12  2014 Sochi          NOR                   12
+## 13  2014 Sochi          SWE                    2
+```
+
+---
+
+## Reshape gold medal totals
+
+We can reshape the data from long to wide format, to make it more **human-readable** when we display the gold medal totals in a table.
+
+
+```r
+# The {tidyr} package helps to convert between
+# long and wide data formats
+*library(tidyr)
+
+# Spread the data from long to wide format for tabulating
+gold_medal_totals_wide &lt;- gold_medal_totals %&gt;%
+  spread(key = Country, value = gold_medal_total)
+```
+
+---
+
+## Reshape gold medal totals
+
+We can reshape the data from long to wide format, to make it more **human-readable** when we display the gold medal totals in a table.
+
+
+```r
+# The {tidyr} package helps to convert between
+# long and wide data formats
+library(tidyr)
+
+# Spread the data from long to wide format for tabulating
+*gold_medal_totals_wide &lt;- gold_medal_totals %&gt;%
+  spread(key = Country, value = gold_medal_total)
+```
+
+---
+
+## Reshape gold medal totals
+
+We can reshape the data from long to wide format, to make it more **human-readable** when we display the gold medal totals in a table.
+
+
+```r
+# The {tidyr} package helps to convert between
+# long and wide data formats
+library(tidyr)
+
+# Spread the data from long to wide format for tabulating
+gold_medal_totals_wide &lt;- gold_medal_totals %&gt;%
+* spread(key = Country, value = gold_medal_total)
+```
+
+---
+
+## Reshape gold medal totals
 
 
 ```r
@@ -679,87 +791,469 @@ gold_medal_totals_wide
 ```
 
 ```
-##   Year           City CAN NOR SWE
-## 1 1998         Nagano   6  10  NA
-## 2 2002 Salt Lake City   8  12  NA
-## 3 2006          Turin   7   2   7
-## 4 2010      Vancouver  15   9   5
-## 5 2014          Sochi  10  12   2
+## # A tibble: 5 x 5
+##    Year City             CAN   NOR   SWE
+##   &lt;dbl&gt; &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1  1998 Nagano             6    10    NA
+## 2  2002 Salt Lake City     8    12    NA
+## 3  2006 Turin              7     2     7
+## 4  2010 Vancouver         15     9     5
+## 5  2014 Sochi             10    12     2
 ```
+
+--
 
 
 ```r
-# NAs appear in the data because Sweden did not win any gold medals
+# NAs appear because SWE did not win any gold medals
 # at the 1998 and 2002 Winter Games
 
-# Replace these NAs with zeroes
-gold_medal_totals_wide[is.na(gold_medal_totals_wide)] &lt;- 0
+# Replace NAs with zeroes
+*gold_medal_totals_wide[is.na(gold_medal_totals_wide)] &lt;- 0
 ```
 
 ---
 
-## Display summary statistics
+## Display gold medal totals
+
+
+```r
+# The {DT} package is used to display interactive tables in HTML documents
+*library(DT)
+
+# Display the totals in a table, with nicer column names
+datatable(gold_medal_totals_wide,
+          rownames = FALSE,
+          options = list(dom = "t"))
+```
+
+---
+
+## Display gold medal totals
 
 
 ```r
 # The {DT} package is used to display interactive tables in HTML documents
 library(DT)
 
-# Display the totals in a table
-datatable(gold_medal_totals_wide,
-          options = list(dom = 't'), rownames = FALSE)
+# Display the totals in a table, with nicer column names
+*datatable(gold_medal_totals_wide,
+          rownames = FALSE,
+          options = list(dom = "t"))
 ```
 
 ---
 
-## Display summary statistics
-
-<div id="htmlwidget-e8b8f48b1e4969ec5e43" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e8b8f48b1e4969ec5e43">{"x":{"filter":"none","fillContainer":false,"data":[[1998,2002,2006,2010,2014],["Nagano","Salt Lake City","Turin","Vancouver","Sochi"],[6,8,7,15,10],[10,12,2,9,12],[0,0,7,5,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>City<\/th>\n      <th>CAN<\/th>\n      <th>NOR<\/th>\n      <th>SWE<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-
----
-
-## Plot the data
-
-We can also plot the gold medal totals we've calculated, which may be more useful as a visual comparison between countries and over time.
-
---
-
-To create the plot, we will use:
-- The `ggplot2` R package
-- The `gold_medal_totals` data that we created earlier, in long format.
-
---
-
-The **gg** in `ggplot2` stands for **[Grammar of Graphics](https://ggplot2.tidyverse.org/)**, the theoretical foundation for how the package works.
-
----
-
-## Plot the data
+## Display gold medal totals
 
 
 ```r
-# The {ggplot2} package is a powerful and fully featured
+# The {DT} package is used to display interactive tables in HTML documents
+library(DT)
+
+# Display the totals in a table, with nicer column names
+datatable(gold_medal_totals_wide,
+*         rownames = FALSE,
+*         options = list(dom = "t"))
+```
+
+---
+
+## Display gold medal totals
+
+<div id="htmlwidget-3918af0f7ecb2e960dfb" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3918af0f7ecb2e960dfb">{"x":{"filter":"none","data":[[1998,2002,2006,2010,2014],["Nagano","Salt Lake City","Turin","Vancouver","Sochi"],[6,8,7,15,10],[10,12,2,9,12],[0,0,7,5,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>City<\/th>\n      <th>CAN<\/th>\n      <th>NOR<\/th>\n      <th>SWE<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+## Plot the data
+
+We can also plot the gold medal totals we've calculated, which will make it easier to draw visual comparisons between countries and over time.
+
+--
+
+Remember our motivating question: **How many gold medals** were won by **Canada, Norway, and Sweden** at the **last five Winter Olympic Games**, up to 2014?
+
+---
+
+&lt;br /&gt;
+...we will learn how to create **this plot**:
+
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/demo1_data_plot.png)
+
+---
+
+## Plot the data
+
+To create the plot, we will use:
+- The `gold_medal_totals` data that we created earlier, in long format.
+- The `ggplot2` R package
+
+
+```r
+# The {ggplot2} package is a powerful, feature-rich
 # R package for creating data visualisations
 library(ggplot2)
 ```
 
-```
-## Warning: package 'ggplot2' was built under R version 3.5.3
-```
+---
+
+## gg = Grammar of Graphics
+
+`ggplot2` draws upon a **layered Grammar of Graphics** as a theoretical foundation for how to make plots (Wilkinson et al., 2005; Wickham, 2010).
+
+--
+
+Think of it like breaking down a plot to its most basic elements...
+
+.footnote[
+[1] Wilkinson et al., 2005, _['The Grammar of Graphics'](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448)_.
+
+[2] Wickham, 2010, ['A layered grammar of graphics'](https://vita.had.co.nz/papers/layered-grammar.html), _Journal of Computational and Graphical Statistics_
+]
+
+---
+class: center, middle
+
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/gg_fig1.PNG)
+
+Wickham, 2010, **['A layered grammar of graphics'](https://vita.had.co.nz/papers/layered-grammar.html)**
+
+---
+class: center, middle
+
+&lt;img src="https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/gg_fig2.PNG" width="717px" /&gt;
+
+Wickham, 2010, **['A layered grammar of graphics'](https://vita.had.co.nz/papers/layered-grammar.html)**
+
+---
+
+## Plot the data
+
 
 ```r
-# Build the plot
-p &lt;- ggplot(data = gold_medal_totals,
+# Start building the plot, layer-by-layer
+*p &lt;- ggplot(data = gold_medal_totals,
             aes(x = Year, y = gold_medal_total,
                 fill = Country))
-p &lt;- p + facet_wrap(~Country, nrow = 1)
 p &lt;- p + geom_bar(stat = "identity")
 ```
 
 ---
 
-![](jtran_essa_preso_files/figure-html/demo1_display_plot-1.png)&lt;!-- --&gt;
+## Plot the data
+
+
+```r
+# Start building the plot, layer-by-layer
+p &lt;- ggplot(data = gold_medal_totals,
+*           aes(x = Year, y = gold_medal_total,
+                fill = Country))
+p &lt;- p + geom_bar(stat = "identity")
+```
+
+---
+
+## Plot the data
+
+
+```r
+# Start building the plot, layer-by-layer
+p &lt;- ggplot(data = gold_medal_totals,
+            aes(x = Year, y = gold_medal_total,
+*               fill = Country))
+p &lt;- p + geom_bar(stat = "identity")
+```
+
+---
+
+## Plot the data
+
+
+```r
+# Start building the plot, layer-by-layer
+p &lt;- ggplot(data = gold_medal_totals,
+            aes(x = Year, y = gold_medal_total,
+                fill = Country))
+*p &lt;- p + geom_bar(stat = "identity")
+```
+
+--
+
+To display the plot, call the object `p`:
+
+
+```r
+p
+```
+
+---
+class: center, middle
+
+![](jtran_essa_preso_files/figure-html/demo1_display_plot_1b-1.png)&lt;!-- --&gt;
+
+It's a start, but...
+
+---
+
+## Areas for improvement
+
+Show countries side-by-side (rather than stacked)
+
+--
+
+Informative plot and axis titles
+
+--
+
+Clearer axis breaks
+
+--
+
+Colourblind-friendly palette
+
+--
+
+Larger font sizes
+
+---
+
+## Countries shown side-by-side
+
+To the previous code chunk we started as the base for this plot, we **add layers** to specify modifications to the plot:
+
+
+```r
+p &lt;- p + facet_wrap(~Country, nrow = 1)
+```
+
+---
+class: center, middle
+
+![](jtran_essa_preso_files/figure-html/demo1_display_plot_2-1.png)&lt;!-- --&gt;
+
+A bit better, but now the legend is redundant, so we can add it to our 'to do' list.
+
+---
+
+## Areas for improvement
+
+~~Show countries side-by-side (rather than stacked)~~
+
+Informative plot and axis titles
+
+Clearer x axis breaks
+
+Colourblind-friendly palette
+
+Larger font sizes
+
+Remove legend
+
+---
+
+## Informative titles
+
+
+```r
+p &lt;- p + labs(
+  title = "Canada increased its Winter Games gold medal haul over 20 years",
+  x = "Year",
+  y = "Total # of gold medals won")
+```
+
+---
+
+![](jtran_essa_preso_files/figure-html/demo1_display_plot_3-1.png)&lt;!-- --&gt;
+
+---
+
+## Areas for improvement
+
+~~Show countries side-by-side (rather than stacked)~~
+
+~~Informative plot and axis titles~~
+
+Clearer x axis breaks
+
+Colourblind-friendly palette
+
+Larger font sizes
+
+Remove legend
+
+---
+
+## Clearer x axis breaks
+
+
+```r
+p &lt;- p + scale_x_continuous(
+  limits = c(1996,2016),
+  breaks = seq(1998,2014, by = 4))
+```
+
+---
+
+![](jtran_essa_preso_files/figure-html/demo1_display_plot_4-1.png)&lt;!-- --&gt;
+
+---
+
+## Areas for improvement
+
+~~Show countries side-by-side (rather than stacked)~~
+
+~~Informative plot and axis titles~~
+
+~~Clearer x axis breaks~~
+
+Colourblind-friendly palette
+
+Larger font sizes
+
+Remove legend
+
+---
+
+## Colourblind-friendly palette
+
+_'As many as 8% of men and 0.5 of women with Northern European ancestry have the common form of red-green color blindness.'_ - National Eye Institute, 2015
+
+--
+
+
+```r
+# The {dichromat} package contains 17 palettes that are
+# "suitable for people with deficient or anomalous red-green vision"
+library(dichromat)
+```
+
+.footnote[
+[1] National Eye Institute, 2015, ['Facts about color blindness'](https://nei.nih.gov/health/color_blindness/facts_about).
+
+[2] University of British Columbia, ['Using colors in R: Accommodating color blindness'](http://stat545.com/block018_colors.html#accomodating-color-blindness), _STAT 545 course materials_.
+]
+
+---
+class: center, middle
+
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/dichromat-colorschemes-1.png)
+
+STAT 545: **[Using colors in R](http://stat545.com/block018_colors.html#accomodating-color-blindness)**
+
+---
+
+## Colourblind-friendly palette
+
+
+```r
+p &lt;- p + scale_fill_manual(
+  values = c(
+    "CAN" = colorschemes$BluetoGray.8[1],
+    "NOR" = colorschemes$BluetoGray.8[2],
+    "SWE" = colorschemes$BluetoGray.8[7]))
+```
+
+---
+
+![](jtran_essa_preso_files/figure-html/demo1_display_plot_5-1.png)&lt;!-- --&gt;
+
+---
+
+## Areas for improvement
+
+~~Show countries side-by-side (rather than stacked)~~
+
+~~Informative plot and axis titles~~
+
+~~Clearer x axis breaks~~
+
+~~Colourblind-friendly palette~~
+
+Larger font sizes
+
+Remove legend
+
+---
+
+## Larger font sizes
+
+
+```r
+# Change the base font size for all text elements
+p &lt;- p + theme(
+  text = element_text(size = 28))
+```
+
+---
+
+![](jtran_essa_preso_files/figure-html/demo1_display_plot_6-1.png)&lt;!-- --&gt;
+
+Notice that the different text elements show a hierarchy of font sizes.
+
+---
+
+# Areas for improvement
+
+~~Show countries side-by-side (rather than stacked)~~
+
+~~Informative plot and axis titles~~
+
+~~Clearer x axis breaks~~
+
+~~Colourblind-friendly palette~~
+
+~~Larger font sizes~~
+
+Remove legend
+
+---
+
+## Remove legend
+
+
+```r
+# Change the base font size for all text elements
+p &lt;- p + theme(
+  text = element_text(size = 28),
+* legend.position = "none")
+```
+
+---
+class: center, middle
+
+![](jtran_essa_preso_files/figure-html/demo1_display_plot_7-1.png)&lt;!-- --&gt;
+
+We're done with our major improvements!
+
+---
+
+## Change position of titles
+
+With our last few tweaks, we can improve readability by increasing the whitespace between the titles and the plot area.
+
+
+```r
+p &lt;- p + theme(
+  text = element_text(size = 28),
+  legend.position = "none",
+* plot.title = element_text(margin = margin(b = 15, unit = "pt")),
+* axis.title.x = element_text(margin = margin(t = 15, unit = "pt")),
+* axis.title.y = element_text(margin = margin(r = 15, unit = "pt")))
+```
+
+---
+class: center, middle
+
+![](jtran_essa_preso_files/figure-html/demo1_display_plot_8-1.png)&lt;!-- --&gt;
+
+All done!
+
+---
+class: inverse, center, middle
+
+# Worked example with exercise data
+## National Health Survey
 
 ---
 class: inverse, center, middle
