@@ -4,6 +4,15 @@
     <title>Data analytics in exercise and sport</title>
     <meta charset="utf-8" />
     <meta name="author" content="@jacquietran — ESSA Forum, 4 May 2019" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -51,11 +60,9 @@ What mistakes are you willing to live with?
 --
 
 .footnote[
-
 [1] Argyris, 1976, ['Single-loop and double-loop models in research on decision-making'](http://academic.udayton.edu/richardghere/igo%20ngo%20research/argyris.pdf), _Administrative Science Quarterly_
 
 [2] Byrne, 2018, ['Why Google defind a new discipline to help humans make decisions'](https://www.fastcompany.com/90203073/why-google-defined-a-new-discipline-to-help-humans-make-decisions), _Fast Company_
-
 ]
 
 ---
@@ -118,9 +125,397 @@ class: inverse, center, bottom
 ---
 class: inverse, center, bottom
 
-# Data analytics in exercise and sport
+# A worked example with sports data
+## Summarising data from the Winter Olympics
 
-## A worked example
+---
+
+&lt;br /&gt;
+Demo 1 uses the `winter` data set downloadable from this link: https://www.kaggle.com/the-guardian/olympic-games/data
+
+It includes all podium results from Winter Olympic Games that have taken place from 1924 to 2014, inclusive.
+
+&lt;center&gt;
+&lt;img src="https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/ChloeKim.jpg" width="600px" /&gt;
+&lt;/center&gt;
+
+---
+
+# Import the data
+
+
+```r
+# The {readr} package is efficient for reading (importing) CSVs
+library(readr)
+
+# Read the data in
+winter &lt;- read_csv(
+  here("data/winter.csv"), col_names = TRUE, col_types = NULL)
+```
+
+---
+
+# Check the data
+
+
+```r
+head(winter)
+```
+
+--
+
+
+```
+## # A tibble: 6 x 9
+##    Year City   Sport  Discipline Athlete      Country Gender Event    Medal
+##   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;
+## 1  1924 Chamo~ Biath~ Biathlon   BERTHET, G.  FRA     Men    Militar~ Bron~
+## 2  1924 Chamo~ Biath~ Biathlon   MANDRILLON,~ FRA     Men    Militar~ Bron~
+## 3  1924 Chamo~ Biath~ Biathlon   MANDRILLON,~ FRA     Men    Militar~ Bron~
+## 4  1924 Chamo~ Biath~ Biathlon   VANDELLE, A~ FRA     Men    Militar~ Bron~
+## 5  1924 Chamo~ Biath~ Biathlon   AUFDENBLATT~ SUI     Men    Militar~ Gold 
+## 6  1924 Chamo~ Biath~ Biathlon   JULEN, Alph~ SUI     Men    Militar~ Gold
+```
+
+---
+
+# Subset the data
+
+Let's say we are interested in comparing the **number of gold medals won** by **Canada, Norway, and Sweden** from the **last five Winter Olympic Games**.
+
+--
+
+We need to subset the data to focus only on:
+
+- Gold medal results
+
+--
+
+- Athletes from Canada (CAN), Norway (NOR), or Sweden (SWE), and
+
+--
+
+- Results from the last five Winter Olympics (1998 to 2014)
+
+---
+
+# Subset the data
+
+
+```r
+# The {dplyr} package includes useful data manipulation functions
+library(dplyr)
+```
+
+```
+## Warning: package 'dplyr' was built under R version 3.5.3
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
+# Subset the data
+gold_medal_comparison &lt;- winter %&gt;%
+  filter(Medal == "Gold"
+         &amp; Country %in% c("CAN", "NOR", "SWE")
+         &amp; Year &gt;= 1998)
+```
+
+---
+
+# Check the data
+
+
+```r
+gold_medal_comparison
+```
+
+```
+## # A tibble: 358 x 9
+##     Year City   Sport  Discipline    Athlete    Country Gender Event  Medal
+##    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;
+##  1  1998 Nagano Biath~ Biathlon      BJOERNDAL~ NOR     Men    10KM   Gold 
+##  2  1998 Nagano Biath~ Biathlon      HANEVOLD,~ NOR     Men    20KM   Gold 
+##  3  1998 Nagano Bobsl~ Bobsleigh     LUEDERS, ~ CAN     Men    Two-M~ Gold 
+##  4  1998 Nagano Bobsl~ Bobsleigh     MACEACHER~ CAN     Men    Two-M~ Gold 
+##  5  1998 Nagano Curli~ Curling       BETKER, J~ CAN     Women  Curli~ Gold 
+##  6  1998 Nagano Curli~ Curling       FORD, Ati~ CAN     Women  Curli~ Gold 
+##  7  1998 Nagano Curli~ Curling       GUDEREIT,~ CAN     Women  Curli~ Gold 
+##  8  1998 Nagano Curli~ Curling       MCCUSKER,~ CAN     Women  Curli~ Gold 
+##  9  1998 Nagano Curli~ Curling       SCHMIRLER~ CAN     Women  Curli~ Gold 
+## 10  1998 Nagano Skati~ Short Track ~ BEDARD, E~ CAN     Men    5000M~ Gold 
+## # ... with 348 more rows
+```
+
+---
+
+# Wrangle the data
+
+In the `winter` data set, the data is structured such that **one row is one medal-winning athlete**.
+
+However...
+
+--
+
+- Team events (e.g., bobsleigh) comprise multiple athletes, and
+
+--
+
+- Within teams that achieve a podium finish, each athlete is awarded a medal.
+
+--
+
+For this analysis, we need to wrangle the data to get it into a format where **one row represents one gold medal per event** (rather than per athlete).
+
+---
+
+# Wrangle the data
+
+
+```r
+# Create a new variable to identify each unique event
+gold_medal_comparison$unique_event_ID &lt;-
+  paste(gold_medal_comparison$Year,
+        gold_medal_comparison$Sport,
+        gold_medal_comparison$Discipline,
+        gold_medal_comparison$Country,
+        gold_medal_comparison$Gender,
+        gold_medal_comparison$Event, sep="_")
+```
+
+---
+
+# Wrangle the data
+
+
+```r
+gold_medal_comparison %&gt;%
+  select(unique_event_ID)
+```
+
+```
+## # A tibble: 358 x 1
+##    unique_event_ID                                           
+##    &lt;chr&gt;                                                     
+##  1 1998_Biathlon_Biathlon_NOR_Men_10KM                       
+##  2 1998_Biathlon_Biathlon_NOR_Men_20KM                       
+##  3 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man                  
+##  4 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man                  
+##  5 1998_Curling_Curling_CAN_Women_Curling                    
+##  6 1998_Curling_Curling_CAN_Women_Curling                    
+##  7 1998_Curling_Curling_CAN_Women_Curling                    
+##  8 1998_Curling_Curling_CAN_Women_Curling                    
+##  9 1998_Curling_Curling_CAN_Women_Curling                    
+## 10 1998_Skating_Short Track Speed Skating_CAN_Men_5000M Relay
+## # ... with 348 more rows
+```
+
+---
+
+# Wrangle the data
+
+
+```r
+# Identify duplicates
+gold_medal_comparison %&gt;%
+  mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
+  select(unique_event_ID, duplicates)
+```
+
+```
+## # A tibble: 358 x 2
+##    unique_event_ID                                            duplicates
+##    &lt;chr&gt;                                                      &lt;lgl&gt;     
+##  1 1998_Biathlon_Biathlon_NOR_Men_10KM                        FALSE     
+##  2 1998_Biathlon_Biathlon_NOR_Men_20KM                        FALSE     
+##  3 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man                   FALSE     
+##  4 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man                   TRUE      
+##  5 1998_Curling_Curling_CAN_Women_Curling                     FALSE     
+##  6 1998_Curling_Curling_CAN_Women_Curling                     TRUE      
+##  7 1998_Curling_Curling_CAN_Women_Curling                     TRUE      
+##  8 1998_Curling_Curling_CAN_Women_Curling                     TRUE      
+##  9 1998_Curling_Curling_CAN_Women_Curling                     TRUE      
+## 10 1998_Skating_Short Track Speed Skating_CAN_Men_5000M Relay FALSE     
+## # ... with 348 more rows
+```
+
+---
+
+# Wrangle the data
+
+
+```r
+# Remove duplicates from the data and
+# remove temporary variables used to identify duplicates
+gold_medal_comparison %&gt;%
+  mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
+* filter(duplicates == FALSE) %&gt;%
+* select(-unique_event_ID, -duplicates)
+```
+
+```
+## # A tibble: 105 x 9
+##     Year City   Sport  Discipline    Athlete    Country Gender Event  Medal
+##    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;
+##  1  1998 Nagano Biath~ Biathlon      BJOERNDAL~ NOR     Men    10KM   Gold 
+##  2  1998 Nagano Biath~ Biathlon      HANEVOLD,~ NOR     Men    20KM   Gold 
+##  3  1998 Nagano Bobsl~ Bobsleigh     LUEDERS, ~ CAN     Men    Two-M~ Gold 
+##  4  1998 Nagano Curli~ Curling       BETKER, J~ CAN     Women  Curli~ Gold 
+##  5  1998 Nagano Skati~ Short Track ~ BEDARD, E~ CAN     Men    5000M~ Gold 
+##  6  1998 Nagano Skati~ Short Track ~ PERREAULT~ CAN     Women  500M   Gold 
+##  7  1998 Nagano Skati~ Speed skating SONDRAL, ~ NOR     Men    1500M  Gold 
+##  8  1998 Nagano Skati~ Speed skating LEMAY DOA~ CAN     Women  500M   Gold 
+##  9  1998 Nagano Skiing Alpine Skiing BURAAS, H~ NOR     Men    Slalom Gold 
+## 10  1998 Nagano Skiing Cross Countr~ DAEHLIE, ~ NOR     Men    10KM ~ Gold 
+## # ... with 95 more rows
+```
+
+---
+
+# Wrangle the data
+
+
+```r
+gold_medal_comparison %&gt;%
+  select(Year, Sport, Country, Event)
+```
+
+```
+## # A tibble: 358 x 4
+##     Year Sport     Country Event      
+##    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;      
+##  1  1998 Biathlon  NOR     10KM       
+##  2  1998 Biathlon  NOR     20KM       
+##  3  1998 Bobsleigh CAN     Two-Man    
+##  4  1998 Bobsleigh CAN     Two-Man    
+##  5  1998 Curling   CAN     Curling    
+##  6  1998 Curling   CAN     Curling    
+##  7  1998 Curling   CAN     Curling    
+##  8  1998 Curling   CAN     Curling    
+##  9  1998 Curling   CAN     Curling    
+## 10  1998 Skating   CAN     5000M Relay
+## # ... with 348 more rows
+```
+
+---
+
+# Calculate summary statistics
+
+The data is now in a format that is ready for calculating summary statistics.
+
+For instance, we can tabulate the total number of gold medals won by Canada, Norway, and Sweden at each of the Winter Games since 1998.
+
+---
+
+# Calculate summary statistics
+
+
+```r
+# The reshape2 package is useful for manipulating data
+# from long-to-wide format and vice versa
+library(reshape2)
+
+# Calculate total number of gold medals per team per Winter Games
+gold_medal_totals &lt;- gold_medal_comparison %&gt;%
+  group_by(Year, City, Country) %&gt;%
+  summarise(gold_medal_total = length(Medal)) %&gt;%
+  ungroup()
+
+# Reshape the data from long-to-wide format for tabulating
+gold_medal_totals_wide &lt;- dcast(
+  gold_medal_totals,
+  Year + City ~ Country,
+  value.var = "gold_medal_total")
+```
+
+---
+
+# Calculate summary statistics
+
+
+```r
+# Check the reshaped data
+gold_medal_totals_wide
+```
+
+```
+##   Year           City CAN NOR SWE
+## 1 1998         Nagano  14  16  NA
+## 2 2002 Salt Lake City  53  23  NA
+## 3 2006          Turin  29   2  36
+## 4 2010      Vancouver  68  16  12
+## 5 2014          Sochi  63  18   8
+```
+
+
+```r
+# NAs appear in the data because Sweden did not win any gold medals
+# at the 1998 and 2002 Winter Games
+
+# Replace these NAs with zeroes
+gold_medal_totals_wide[is.na(gold_medal_totals_wide)] &lt;- 0
+```
+
+---
+
+# Display summary statistics
+
+
+```r
+# The DT package is used to display interactive tables in HTML documents
+library(DT)
+
+# Display the table
+datatable(gold_medal_totals_wide, options = list(dom = 't'), rownames = FALSE)
+```
+
+---
+
+# Display summary statistics
+
+
+```
+## Warning: package 'DT' was built under R version 3.5.3
+```
+
+<div id="htmlwidget-c03bbb12854478ca1784" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c03bbb12854478ca1784">{"x":{"filter":"none","fillContainer":false,"data":[[1998,2002,2006,2010,2014],["Nagano","Salt Lake City","Turin","Vancouver","Sochi"],[14,53,29,68,63],[16,23,2,16,18],[0,0,36,12,8]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>City<\/th>\n      <th>CAN<\/th>\n      <th>NOR<\/th>\n      <th>SWE<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+# Calculate summary statistics
+
+We can use the data frame we've just created - gold medal totals per team per Games - to calculate the median number of gold medals won by Canada, Norway, and Sweden at the last five Games.
+
+
+```r
+gold_medal_medians &lt;- gold_medal_totals_wide %&gt;%
+  summarise(CAN = median(CAN),
+            NOR = median(NOR),
+            SWE = median(SWE))
+
+gold_medal_medians
+```
+
+```
+##   CAN NOR SWE
+## 1  53  16   8
+```
 
 ---
 
