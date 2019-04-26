@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
-    <title>Data analytics in exercise and sport</title>
+    <title>Data analytics in exercise &amp; sport</title>
     <meta charset="utf-8" />
-    <meta name="author" content="@jacquietran — ESSA Forum, 4 May 2019" />
     <script src="libs/htmlwidgets/htmlwidgets.js"></script>
     <script src="libs/jquery/jquery.min.js"></script>
     <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
@@ -19,9 +18,8 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Data analytics in exercise and sport
-## <br />Dr Jacquie Tran
-### <span class="citation">@jacquietran</span> — ESSA Forum, 4 May 2019
+# Data analytics in exercise &amp; sport
+### Dr Jacquie Tran   |   <span class="citation">@jacquietran</span> |   4 May 2019
 
 ---
 
@@ -30,7 +28,7 @@ class: center, middle, inverse, title-slide
 
 
 
-class: inverse, center, bottom
+class: inverse, center, middle
 
 # 'Start with the end in mind.'
 
@@ -39,123 +37,195 @@ class: inverse, center, bottom
 &lt;br /&gt;
 &lt;br /&gt;
 
-What is the decision in need of evidence?
+What is the **decision** in need of evidence? (the motivating question)
 
 --
 
-How will you make the decision with no additional information?
+How will you make the decision with **no additional information**?
 
 --
 
-How would you make the decision if you had access to any information you wanted?
+How would you make the decision if you had access to **any information you wanted**?
 
 --
 
-Can you get access to all the data you ideally want to make your decision?
+Can you get **access** to all the data you ideally want to make your decision?
 
 --
 
-What mistakes are you willing to live with?
+What **mistakes** are you willing to live with?
 
 --
 
 .footnote[
-[1] Argyris, 1976, ['Single-loop and double-loop models in research on decision-making'](http://academic.udayton.edu/richardghere/igo%20ngo%20research/argyris.pdf), _Administrative Science Quarterly_
+[1] Argyris, 1976, ['Single-loop and double-loop models in research on decision-making'](http://academic.udayton.edu/richardghere/igo%20ngo%20research/argyris.pdf), _Administrative Science Quarterly_.
 
-[2] Byrne, 2018, ['Why Google defind a new discipline to help humans make decisions'](https://www.fastcompany.com/90203073/why-google-defined-a-new-discipline-to-help-humans-make-decisions), _Fast Company_
+[2] Byrne, 2018, ['Why Google defind a new discipline to help humans make decisions'](https://www.fastcompany.com/90203073/why-google-defined-a-new-discipline-to-help-humans-make-decisions), _Fast Company_.
 ]
 
 ---
-class: inverse, center, bottom
+class: inverse, center, middle
 
-# Working with data // Coding with data
-
----
-
-# Excel: Its power and its pitfalls
-
---
-
-1. Data, analysis outputs, and visualisation are stored in one place.
-
---
-
-2. Data is easily manipulated - high risk of introducing errors.
-
---
-
-3. Point-and-click interface - manual repetition!
-
---
-
-4. Actions are not logged by default.
-
---
-
-5. Slow when working with large data sets or files storing many computations.
-
---
-
-6. Complicated workbooks can 'break' when shared with others.
+# Coding with data
 
 ---
 
-# The case for coding
+## Excel: Its power and its pitfalls
 
 --
 
-1. Separation of data, analysis outputs, visualisations, and reports.
+1. Data, analysis outputs, and visualisation are **stored in one file**.
 
 --
 
-2. Reproducible, transparent, and less error-prone workflow.
+2. Data is **easily manipulated** - high risk of introducing errors.
 
 --
 
-3. Coding methods are faster for repetitive actions than point-and-click.
+3. Point-and-click interface - **manual repetition!**
 
 --
 
-4. Procedures are documented via scripts and command history.
+4. **Actions are not logged** by default.
 
 --
 
-5. Build your own library of frequently used analytical procedures - or use and adapt libraries created by open source developers!
+5. **Slow** when working with large data sets or files storing many computations.
+
+--
+
+6. Complicated **workbooks can 'break' when shared** with others.
 
 ---
-class: inverse, center, bottom
+class: inverse, center, middle
 
-# A worked example with sports data
-## Summarising data from the Winter Olympics
+&lt;img src="https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/excel_stopped_working.png" width = "700px" /&gt;
+
+---
+
+## The case for coding
+
+--
+
+1. **Separation** of data, analysis outputs, visualisations, and reports.
+
+--
+
+2. **Reproducible**, transparent, and less error-prone workflow.
+
+--
+
+3. Coding methods are **faster** than point-and-click as your **data gets bigger**, your **actions more repetitive**, and your **analyses more sophisticated**.
+
+--
+
+4. Procedures are **documented** via scripts and command history.
+
+--
+
+5. **Build your own library** of frequently used analytical procedures - or use and adapt libraries created by open source developers!
+
+---
+class: inverse, center, middle
+
+# A tidy workflow
+
+---
+class: center, middle
+
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/tidy_workflow.png)
+
+Grolemund &amp; Wickham, 2017, **[R for Data Science](https://r4ds.had.co.nz/)**
+
+---
+class: inverse, center, middle
+
+# Worked example with sports data
+## Winter Olympics medallists 1924–2014
 
 ---
 
 &lt;br /&gt;
-Demo 1 uses the `winter` data set downloadable from this link: https://www.kaggle.com/the-guardian/olympic-games/data
-
-It includes all podium results from Winter Olympic Games that have taken place from 1924 to 2014, inclusive.
+This example uses a publicly available data set that includes **all podium results from the Winter Olympic Games from 1924 to 2014, inclusive**.
 
 &lt;center&gt;
 &lt;img src="https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/ChloeKim.jpg" width="600px" /&gt;
 &lt;/center&gt;
 
+--
+
+The `winter` data set is downloadable from this link:  
+**[https://www.kaggle.com/the-guardian/olympic-games/data](https://www.kaggle.com/the-guardian/olympic-games/data)**
+
+---
+class: inverse, center, middle
+
+# 'Start with the end in mind.'
+
+---
+class: center, middle
+
+## **How many gold medals** were won by
+## **Canada, Norway, and Sweden** at the
+## **last five Winter Olympic Games**, up to 2014?
+
 ---
 
-# Import the data
+&lt;br /&gt;
+To answer this question, we will use R to create this **data table**...
+
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/demo1_data_table.PNG)
+
+---
+
+&lt;br /&gt;
+...and this **data plot**!
+
+---
+
+## Import the data
 
 
 ```r
 # The {readr} package is efficient for reading (importing) CSVs
 library(readr)
 
-# Read the data in
+# Import the data into your R session
 winter &lt;- read_csv(
   here("data/winter.csv"), col_names = TRUE, col_types = NULL)
 ```
 
 ---
 
-# Check the data
+## Import the data
+
+
+```r
+# The {readr} package is efficient for reading (importing) CSVs
+*library(readr)
+
+# Import the data into your R session
+winter &lt;- read_csv(
+  here("data/winter.csv"), col_names = TRUE, col_types = NULL)
+```
+
+---
+
+## Import the data
+
+
+```r
+# The {readr} package is efficient for reading (importing) CSVs
+library(readr)
+
+# Import the data into your R session
+*winter &lt;- read_csv(
+* here("data/winter.csv"), col_names = TRUE, col_types = NULL)
+```
+
+---
+
+## Check the data
 
 
 ```r
@@ -179,9 +249,9 @@ head(winter)
 
 ---
 
-# Subset the data
+## Subset the data
 
-Let's say we are interested in comparing the **number of gold medals won** by **Canada, Norway, and Sweden** from the **last five Winter Olympic Games**.
+Remember our motivating question: **How many gold medals** were won by **Canada, Norway, and Sweden** at the **last five Winter Olympic Games**, up to 2014?
 
 --
 
@@ -195,40 +265,17 @@ We need to subset the data to focus only on:
 
 --
 
-- Results from the last five Winter Olympics (1998 to 2014)
+- Results from the five Winter Olympics between 1998 to 2014, inclusive.
 
 ---
 
-# Subset the data
+## Subset the data
 
 
 ```r
 # The {dplyr} package includes useful data manipulation functions
-library(dplyr)
-```
+*library(dplyr)
 
-```
-## Warning: package 'dplyr' was built under R version 3.5.3
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
 # Subset the data
 gold_medal_comparison &lt;- winter %&gt;%
   filter(Medal == "Gold"
@@ -238,33 +285,64 @@ gold_medal_comparison &lt;- winter %&gt;%
 
 ---
 
-# Check the data
+## Subset the data
 
 
 ```r
-gold_medal_comparison
-```
+# The {dplyr} package includes useful data manipulation functions
+library(dplyr)
 
-```
-## # A tibble: 358 x 9
-##     Year City   Sport  Discipline    Athlete    Country Gender Event  Medal
-##    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;
-##  1  1998 Nagano Biath~ Biathlon      BJOERNDAL~ NOR     Men    10KM   Gold 
-##  2  1998 Nagano Biath~ Biathlon      HANEVOLD,~ NOR     Men    20KM   Gold 
-##  3  1998 Nagano Bobsl~ Bobsleigh     LUEDERS, ~ CAN     Men    Two-M~ Gold 
-##  4  1998 Nagano Bobsl~ Bobsleigh     MACEACHER~ CAN     Men    Two-M~ Gold 
-##  5  1998 Nagano Curli~ Curling       BETKER, J~ CAN     Women  Curli~ Gold 
-##  6  1998 Nagano Curli~ Curling       FORD, Ati~ CAN     Women  Curli~ Gold 
-##  7  1998 Nagano Curli~ Curling       GUDEREIT,~ CAN     Women  Curli~ Gold 
-##  8  1998 Nagano Curli~ Curling       MCCUSKER,~ CAN     Women  Curli~ Gold 
-##  9  1998 Nagano Curli~ Curling       SCHMIRLER~ CAN     Women  Curli~ Gold 
-## 10  1998 Nagano Skati~ Short Track ~ BEDARD, E~ CAN     Men    5000M~ Gold 
-## # ... with 348 more rows
+# Subset the data
+*gold_medal_comparison &lt;- winter %&gt;%
+  filter(Medal == "Gold"
+         &amp; Country %in% c("CAN", "NOR", "SWE")
+         &amp; Year &gt;= 1998)
 ```
 
 ---
 
-# Wrangle the data
+## Subset the data
+
+
+```r
+# The {dplyr} package includes useful data manipulation functions
+library(dplyr)
+
+# Subset the data
+gold_medal_comparison &lt;- winter %&gt;%
+* filter(Medal == "Gold"
+*        &amp; Country %in% c("CAN", "NOR", "SWE")
+*        &amp; Year &gt;= 1998)
+```
+
+---
+
+## Check the data
+
+
+```r
+head(gold_medal_comparison,
+*    n = 9)
+```
+
+```
+## # A tibble: 9 x 9
+##    Year City   Sport   Discipline Athlete        Country Gender Event Medal
+##   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;
+## 1  1998 Nagano Biathl~ Biathlon   BJOERNDALEN, ~ NOR     Men    10KM  Gold 
+## 2  1998 Nagano Biathl~ Biathlon   HANEVOLD, Hal~ NOR     Men    20KM  Gold 
+## 3  1998 Nagano Bobsle~ Bobsleigh  LUEDERS, Pier~ CAN     Men    Two-~ Gold 
+## 4  1998 Nagano Bobsle~ Bobsleigh  MACEACHERN, D~ CAN     Men    Two-~ Gold 
+## 5  1998 Nagano Curling Curling    BETKER, Jan    CAN     Women  Curl~ Gold 
+## 6  1998 Nagano Curling Curling    FORD, Atina    CAN     Women  Curl~ Gold 
+## 7  1998 Nagano Curling Curling    GUDEREIT, Mar~ CAN     Women  Curl~ Gold 
+## 8  1998 Nagano Curling Curling    MCCUSKER, Joan CAN     Women  Curl~ Gold 
+## 9  1998 Nagano Curling Curling    SCHMIRLER, Sa~ CAN     Women  Curl~ Gold
+```
+
+---
+
+## Wrangle the data
 
 In the `winter` data set, the data is structured such that **one row is one medal-winning athlete**.
 
@@ -272,7 +350,7 @@ However...
 
 --
 
-- Team events (e.g., bobsleigh) comprise multiple athletes, and
+- Team events (e.g., bobsleigh, curling) comprise multiple athletes, and
 
 --
 
@@ -284,29 +362,50 @@ For this analysis, we need to wrangle the data to get it into a format where **o
 
 ---
 
-# Wrangle the data
+## Wrangle the data
 
 
 ```r
 # Create a new variable to identify each unique event
-gold_medal_comparison$unique_event_ID &lt;-
+*gold_medal_comparison$unique_event_ID &lt;-
   paste(gold_medal_comparison$Year,
         gold_medal_comparison$Sport,
         gold_medal_comparison$Discipline,
         gold_medal_comparison$Country,
         gold_medal_comparison$Gender,
-        gold_medal_comparison$Event, sep="_")
+        gold_medal_comparison$Event,
+        sep = "_")
 ```
 
 ---
 
-# Wrangle the data
+## Wrangle the data
+
+
+```r
+# Create a new variable to identify each unique event
+gold_medal_comparison$unique_event_ID &lt;-
+* paste(gold_medal_comparison$Year,
+*       gold_medal_comparison$Sport,
+*       gold_medal_comparison$Discipline,
+*       gold_medal_comparison$Country,
+*       gold_medal_comparison$Gender,
+*       gold_medal_comparison$Event,
+*       sep = "_")
+```
+
+---
+
+## Wrangle the data
 
 
 ```r
 gold_medal_comparison %&gt;%
-  select(unique_event_ID)
+* select(unique_event_ID)
 ```
+
+--
+
 
 ```
 ## # A tibble: 358 x 1
@@ -327,106 +426,232 @@ gold_medal_comparison %&gt;%
 
 ---
 
-# Wrangle the data
+## Wrangle the data
+
+
+```r
+gold_medal_comparison %&gt;%
+  select(unique_event_ID)
+```
+
+```
+## # A tibble: 358 x 1
+##    unique_event_ID                                           
+##    &lt;chr&gt;                                                     
+##  1 1998_Biathlon_Biathlon_NOR_Men_10KM                       
+##  2 1998_Biathlon_Biathlon_NOR_Men_20KM                       
+*##  3 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man                  
+*##  4 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man                  
+##  5 1998_Curling_Curling_CAN_Women_Curling                    
+##  6 1998_Curling_Curling_CAN_Women_Curling                    
+##  7 1998_Curling_Curling_CAN_Women_Curling                    
+##  8 1998_Curling_Curling_CAN_Women_Curling                    
+##  9 1998_Curling_Curling_CAN_Women_Curling                    
+## 10 1998_Skating_Short Track Speed Skating_CAN_Men_5000M Relay
+## # ... with 348 more rows
+```
+
+---
+
+## Wrangle the data
+
+
+```r
+gold_medal_comparison %&gt;%
+  select(unique_event_ID)
+```
+
+```
+## # A tibble: 358 x 1
+##    unique_event_ID                                           
+##    &lt;chr&gt;                                                     
+##  1 1998_Biathlon_Biathlon_NOR_Men_10KM                       
+##  2 1998_Biathlon_Biathlon_NOR_Men_20KM                       
+##  3 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man                  
+##  4 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man                  
+*##  5 1998_Curling_Curling_CAN_Women_Curling                    
+*##  6 1998_Curling_Curling_CAN_Women_Curling                    
+*##  7 1998_Curling_Curling_CAN_Women_Curling                    
+*##  8 1998_Curling_Curling_CAN_Women_Curling                    
+*##  9 1998_Curling_Curling_CAN_Women_Curling                    
+## 10 1998_Skating_Short Track Speed Skating_CAN_Men_5000M Relay
+## # ... with 348 more rows
+```
+
+---
+
+## Wrangle the data
+
+
+```r
+# Identify duplicates
+gold_medal_comparison %&gt;%
+* mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
+  select(unique_event_ID, duplicates) %&gt;%
+  head(n = 7)
+```
+
+--
+
+
+```
+## # A tibble: 7 x 2
+##   unique_event_ID                          duplicates
+##   &lt;chr&gt;                                    &lt;lgl&gt;     
+## 1 1998_Biathlon_Biathlon_NOR_Men_10KM      FALSE     
+## 2 1998_Biathlon_Biathlon_NOR_Men_20KM      FALSE     
+## 3 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man FALSE     
+## 4 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man TRUE      
+## 5 1998_Curling_Curling_CAN_Women_Curling   FALSE     
+## 6 1998_Curling_Curling_CAN_Women_Curling   TRUE      
+## 7 1998_Curling_Curling_CAN_Women_Curling   TRUE
+```
+
+---
+
+## Wrangle the data
 
 
 ```r
 # Identify duplicates
 gold_medal_comparison %&gt;%
   mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
-  select(unique_event_ID, duplicates)
+  select(unique_event_ID, duplicates) %&gt;%
+  head(n = 7)
 ```
 
 ```
-## # A tibble: 358 x 2
-##    unique_event_ID                                            duplicates
-##    &lt;chr&gt;                                                      &lt;lgl&gt;     
-##  1 1998_Biathlon_Biathlon_NOR_Men_10KM                        FALSE     
-##  2 1998_Biathlon_Biathlon_NOR_Men_20KM                        FALSE     
-##  3 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man                   FALSE     
-##  4 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man                   TRUE      
-##  5 1998_Curling_Curling_CAN_Women_Curling                     FALSE     
-##  6 1998_Curling_Curling_CAN_Women_Curling                     TRUE      
-##  7 1998_Curling_Curling_CAN_Women_Curling                     TRUE      
-##  8 1998_Curling_Curling_CAN_Women_Curling                     TRUE      
-##  9 1998_Curling_Curling_CAN_Women_Curling                     TRUE      
-## 10 1998_Skating_Short Track Speed Skating_CAN_Men_5000M Relay FALSE     
-## # ... with 348 more rows
+## # A tibble: 7 x 2
+##   unique_event_ID                          duplicates
+##   &lt;chr&gt;                                    &lt;lgl&gt;     
+## 1 1998_Biathlon_Biathlon_NOR_Men_10KM      FALSE     
+## 2 1998_Biathlon_Biathlon_NOR_Men_20KM      FALSE     
+## 3 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man FALSE     
+*## 4 1998_Bobsleigh_Bobsleigh_CAN_Men_Two-Man TRUE      
+## 5 1998_Curling_Curling_CAN_Women_Curling   FALSE     
+*## 6 1998_Curling_Curling_CAN_Women_Curling   TRUE      
+*## 7 1998_Curling_Curling_CAN_Women_Curling   TRUE
 ```
 
 ---
 
-# Wrangle the data
+## Wrangle the data
 
 
 ```r
-# Remove duplicates from the data and
-# remove temporary variables used to identify duplicates
-gold_medal_comparison %&gt;%
+# Remove duplicates from the data
+*gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
+  mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
+  filter(duplicates == FALSE) %&gt;%
+  select(Year, City, Sport, Country, Event, Medal)
+```
+
+---
+
+## Wrangle the data
+
+
+```r
+# Remove duplicates from the data
+gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
+* mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
+  filter(duplicates == FALSE) %&gt;%
+  select(Year, City, Sport, Country, Event, Medal)
+```
+
+---
+
+## Wrangle the data
+
+
+```r
+# Remove duplicates from the data
+gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
   mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
 * filter(duplicates == FALSE) %&gt;%
-* select(-unique_event_ID, -duplicates)
+* select(Year, City, Sport, Country, Event, Medal)
 ```
 
+--
+
+
 ```
-## # A tibble: 105 x 9
-##     Year City   Sport  Discipline    Athlete    Country Gender Event  Medal
-##    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;
-##  1  1998 Nagano Biath~ Biathlon      BJOERNDAL~ NOR     Men    10KM   Gold 
-##  2  1998 Nagano Biath~ Biathlon      HANEVOLD,~ NOR     Men    20KM   Gold 
-##  3  1998 Nagano Bobsl~ Bobsleigh     LUEDERS, ~ CAN     Men    Two-M~ Gold 
-##  4  1998 Nagano Curli~ Curling       BETKER, J~ CAN     Women  Curli~ Gold 
-##  5  1998 Nagano Skati~ Short Track ~ BEDARD, E~ CAN     Men    5000M~ Gold 
-##  6  1998 Nagano Skati~ Short Track ~ PERREAULT~ CAN     Women  500M   Gold 
-##  7  1998 Nagano Skati~ Speed skating SONDRAL, ~ NOR     Men    1500M  Gold 
-##  8  1998 Nagano Skati~ Speed skating LEMAY DOA~ CAN     Women  500M   Gold 
-##  9  1998 Nagano Skiing Alpine Skiing BURAAS, H~ NOR     Men    Slalom Gold 
-## 10  1998 Nagano Skiing Cross Countr~ DAEHLIE, ~ NOR     Men    10KM ~ Gold 
-## # ... with 95 more rows
+## # A tibble: 6 x 6
+##    Year City   Sport     Country Event       Medal
+##   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;
+## 1  1998 Nagano Biathlon  NOR     10KM        Gold 
+## 2  1998 Nagano Biathlon  NOR     20KM        Gold 
+## 3  1998 Nagano Bobsleigh CAN     Two-Man     Gold 
+## 4  1998 Nagano Curling   CAN     Curling     Gold 
+## 5  1998 Nagano Skating   CAN     5000M Relay Gold 
+## 6  1998 Nagano Skating   CAN     500M        Gold
 ```
 
 ---
 
-# Wrangle the data
+## Wrangle the data
 
 
 ```r
-gold_medal_comparison %&gt;%
-  select(Year, Sport, Country, Event)
+# Remove duplicates from the data
+gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
+  mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
+  filter(duplicates == FALSE) %&gt;%
+  select(Year, City, Sport, Country, Event, Medal)
 ```
 
+
 ```
-## # A tibble: 358 x 4
-##     Year Sport     Country Event      
-##    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;      
-##  1  1998 Biathlon  NOR     10KM       
-##  2  1998 Biathlon  NOR     20KM       
-##  3  1998 Bobsleigh CAN     Two-Man    
-##  4  1998 Bobsleigh CAN     Two-Man    
-##  5  1998 Curling   CAN     Curling    
-##  6  1998 Curling   CAN     Curling    
-##  7  1998 Curling   CAN     Curling    
-##  8  1998 Curling   CAN     Curling    
-##  9  1998 Curling   CAN     Curling    
-## 10  1998 Skating   CAN     5000M Relay
-## # ... with 348 more rows
+## # A tibble: 6 x 6
+##    Year City   Sport     Country Event       Medal
+##   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;
+## 1  1998 Nagano Biathlon  NOR     10KM        Gold 
+## 2  1998 Nagano Biathlon  NOR     20KM        Gold 
+*## 3  1998 Nagano Bobsleigh CAN     Two-Man     Gold 
+## 4  1998 Nagano Curling   CAN     Curling     Gold 
+## 5  1998 Nagano Skating   CAN     5000M Relay Gold 
+## 6  1998 Nagano Skating   CAN     500M        Gold
 ```
 
 ---
 
-# Calculate summary statistics
-
-The data is now in a format that is ready for calculating summary statistics.
-
-For instance, we can tabulate the total number of gold medals won by Canada, Norway, and Sweden at each of the Winter Games since 1998.
-
----
-
-# Calculate summary statistics
+## Wrangle the data
 
 
 ```r
-# The reshape2 package is useful for manipulating data
+# Remove duplicates from the data
+gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
+  mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
+  filter(duplicates == FALSE) %&gt;%
+  select(Year, City, Sport, Country, Event, Medal)
+```
+
+
+```
+## # A tibble: 6 x 6
+##    Year City   Sport     Country Event       Medal
+##   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;
+## 1  1998 Nagano Biathlon  NOR     10KM        Gold 
+## 2  1998 Nagano Biathlon  NOR     20KM        Gold 
+## 3  1998 Nagano Bobsleigh CAN     Two-Man     Gold 
+*## 4  1998 Nagano Curling   CAN     Curling     Gold 
+## 5  1998 Nagano Skating   CAN     5000M Relay Gold 
+## 6  1998 Nagano Skating   CAN     500M        Gold
+```
+
+---
+
+## Calculate summary statistics
+
+Now that we have tidied up the data into the format we need, we can calculate the **total number of gold medals** won by **Canada, Norway, and Sweden** at each of the **Winter Games between 1998 and 2014**.
+
+---
+
+## Calculate summary statistics
+
+
+```r
+# The {reshape2} package is useful for manipulating data
 # from long-to-wide format and vice versa
 library(reshape2)
 
@@ -445,7 +670,7 @@ gold_medal_totals_wide &lt;- dcast(
 
 ---
 
-# Calculate summary statistics
+## Calculate summary statistics
 
 
 ```r
@@ -455,11 +680,11 @@ gold_medal_totals_wide
 
 ```
 ##   Year           City CAN NOR SWE
-## 1 1998         Nagano  14  16  NA
-## 2 2002 Salt Lake City  53  23  NA
-## 3 2006          Turin  29   2  36
-## 4 2010      Vancouver  68  16  12
-## 5 2014          Sochi  63  18   8
+## 1 1998         Nagano   6  10  NA
+## 2 2002 Salt Lake City   8  12  NA
+## 3 2006          Turin   7   2   7
+## 4 2010      Vancouver  15   9   5
+## 5 2014          Sochi  10  12   2
 ```
 
 
@@ -473,65 +698,71 @@ gold_medal_totals_wide[is.na(gold_medal_totals_wide)] &lt;- 0
 
 ---
 
-# Display summary statistics
+## Display summary statistics
 
 
 ```r
-# The DT package is used to display interactive tables in HTML documents
+# The {DT} package is used to display interactive tables in HTML documents
 library(DT)
 
-# Display the table
-datatable(gold_medal_totals_wide, options = list(dom = 't'), rownames = FALSE)
+# Display the totals in a table
+datatable(gold_medal_totals_wide,
+          options = list(dom = 't'), rownames = FALSE)
 ```
 
 ---
 
-# Display summary statistics
+## Display summary statistics
 
-
-```
-## Warning: package 'DT' was built under R version 3.5.3
-```
-
-<div id="htmlwidget-c03bbb12854478ca1784" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c03bbb12854478ca1784">{"x":{"filter":"none","fillContainer":false,"data":[[1998,2002,2006,2010,2014],["Nagano","Salt Lake City","Turin","Vancouver","Sochi"],[14,53,29,68,63],[16,23,2,16,18],[0,0,36,12,8]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>City<\/th>\n      <th>CAN<\/th>\n      <th>NOR<\/th>\n      <th>SWE<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-e8b8f48b1e4969ec5e43" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e8b8f48b1e4969ec5e43">{"x":{"filter":"none","fillContainer":false,"data":[[1998,2002,2006,2010,2014],["Nagano","Salt Lake City","Turin","Vancouver","Sochi"],[6,8,7,15,10],[10,12,2,9,12],[0,0,7,5,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>City<\/th>\n      <th>CAN<\/th>\n      <th>NOR<\/th>\n      <th>SWE<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
-# Calculate summary statistics
+## Plot the data
 
-We can use the data frame we've just created - gold medal totals per team per Games - to calculate the median number of gold medals won by Canada, Norway, and Sweden at the last five Games.
+We can also plot the gold medal totals we've calculated, which may be more useful as a visual comparison between countries and over time.
+
+--
+
+To create the plot, we will use:
+- The `ggplot2` R package
+- The `gold_medal_totals` data that we created earlier, in long format.
+
+--
+
+The **gg** in `ggplot2` stands for **[Grammar of Graphics](https://ggplot2.tidyverse.org/)**, the theoretical foundation for how the package works.
+
+---
+
+## Plot the data
 
 
 ```r
-gold_medal_medians &lt;- gold_medal_totals_wide %&gt;%
-  summarise(CAN = median(CAN),
-            NOR = median(NOR),
-            SWE = median(SWE))
-
-gold_medal_medians
+# The {ggplot2} package is a powerful and fully featured
+# R package for creating data visualisations
+library(ggplot2)
 ```
 
 ```
-##   CAN NOR SWE
-## 1  53  16   8
+## Warning: package 'ggplot2' was built under R version 3.5.3
 ```
-
----
-
-# Section subheader
-
-Slide body text
-
 
 ```r
-# Some code I put here for aesthetic purposes ----------------------------------
-
-devtools::install_github("yihui/xaringan")
+# Build the plot
+p &lt;- ggplot(data = gold_medal_totals,
+            aes(x = Year, y = gold_medal_total,
+                fill = Country))
+p &lt;- p + facet_wrap(~Country, nrow = 1)
+p &lt;- p + geom_bar(stat = "identity")
 ```
 
 ---
-class: inverse, center, bottom
+
+![](jtran_essa_preso_files/figure-html/demo1_display_plot-1.png)&lt;!-- --&gt;
+
+---
+class: inverse, center, middle
 
 # Developing data proficiency
 

@@ -1,7 +1,6 @@
 ---
-title: "Data analytics in exercise and sport"
-subtitle: "<br />Dr Jacquie Tran"
-author: "@jacquietran --- ESSA Forum, 4 May 2019"
+title: "Data analytics in exercise & sport"
+date: "Dr Jacquie Tran &nbsp; | &nbsp; @jacquietran | &nbsp; 4 May 2019"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -29,11 +28,11 @@ library(xaringanthemer)
 
 mono_light(
   base_color = ghibli_palette("MononokeDark")[3],
-  header_font_google = google_font("Amatic SC", "400b"),
-  header_h1_font_size = "80px",
-  header_h2_font_size = "60px",
-  header_h3_font_size = "50px",
-  header_font_weight = "bold",
+  header_font_google = google_font("Walter Turncoat"),
+  header_h1_font_size = "65px",
+  header_h2_font_size = "50px",
+  header_h3_font_size = "40px",
+  # header_font_weight = "bold",
   text_font_google   = google_font("Montserrat", "400", "400i", "400b"),
   text_font_size = "26px",
   code_font_google   = google_font("Droid Mono"),
@@ -45,7 +44,7 @@ mono_light(
 
 ```
 
-class: inverse, center, bottom
+class: inverse, center, middle
 
 # 'Start with the end in mind.'
 
@@ -54,116 +53,160 @@ class: inverse, center, bottom
 <br />
 <br />
 
-What is the decision in need of evidence?
+What is the **decision** in need of evidence? (the motivating question)
 
 --
 
-How will you make the decision with no additional information?
+How will you make the decision with **no additional information**?
 
 --
 
-How would you make the decision if you had access to any information you wanted?
+How would you make the decision if you had access to **any information you wanted**?
 
 --
 
-Can you get access to all the data you ideally want to make your decision?
+Can you get **access** to all the data you ideally want to make your decision?
 
 --
 
-What mistakes are you willing to live with?
+What **mistakes** are you willing to live with?
 
 --
 
 .footnote[
-[1] Argyris, 1976, ['Single-loop and double-loop models in research on decision-making'](http://academic.udayton.edu/richardghere/igo%20ngo%20research/argyris.pdf), _Administrative Science Quarterly_
+[1] Argyris, 1976, ['Single-loop and double-loop models in research on decision-making'](http://academic.udayton.edu/richardghere/igo%20ngo%20research/argyris.pdf), _Administrative Science Quarterly_.
 
-[2] Byrne, 2018, ['Why Google defind a new discipline to help humans make decisions'](https://www.fastcompany.com/90203073/why-google-defined-a-new-discipline-to-help-humans-make-decisions), _Fast Company_
+[2] Byrne, 2018, ['Why Google defind a new discipline to help humans make decisions'](https://www.fastcompany.com/90203073/why-google-defined-a-new-discipline-to-help-humans-make-decisions), _Fast Company_.
 ]
 
 ---
-class: inverse, center, bottom
+class: inverse, center, middle
 
-# Working with data // Coding with data
-
----
-
-# Excel: Its power and its pitfalls
-
---
-
-1. Data, analysis outputs, and visualisation are stored in one place.
-
---
-
-2. Data is easily manipulated - high risk of introducing errors.
-
---
-
-3. Point-and-click interface - manual repetition!
-
---
-
-4. Actions are not logged by default.
-
---
-
-5. Slow when working with large data sets or files storing many computations.
-
---
-
-6. Complicated workbooks can 'break' when shared with others.
+# Coding with data
 
 ---
 
-# The case for coding
+## Excel: Its power and its pitfalls
 
 --
 
-1. Separation of data, analysis outputs, visualisations, and reports.
+1. Data, analysis outputs, and visualisation are **stored in one file**.
 
 --
 
-2. Reproducible, transparent, and less error-prone workflow.
+2. Data is **easily manipulated** - high risk of introducing errors.
 
 --
 
-3. Coding methods are faster for repetitive actions than point-and-click.
+3. Point-and-click interface - **manual repetition!**
 
 --
 
-4. Procedures are documented via scripts and command history.
+4. **Actions are not logged** by default.
 
 --
 
-5. Build your own library of frequently used analytical procedures - or use and adapt libraries created by open source developers!
+5. **Slow** when working with large data sets or files storing many computations.
+
+--
+
+6. Complicated **workbooks can 'break' when shared** with others.
 
 ---
-class: inverse, center, bottom
+class: inverse, center, middle
 
-# A worked example with sports data
-## Summarising data from the Winter Olympics
+<img src="https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/excel_stopped_working.png" width = "700px" />
+
+---
+
+## The case for coding
+
+--
+
+1. **Separation** of data, analysis outputs, visualisations, and reports.
+
+--
+
+2. **Reproducible**, transparent, and less error-prone workflow.
+
+--
+
+3. Coding methods are **faster** than point-and-click as your **data gets bigger**, your **actions more repetitive**, and your **analyses more sophisticated**.
+
+--
+
+4. Procedures are **documented** via scripts and command history.
+
+--
+
+5. **Build your own library** of frequently used analytical procedures - or use and adapt libraries created by open source developers!
+
+---
+class: inverse, center, middle
+
+# A tidy workflow
+
+---
+class: center, middle
+
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/tidy_workflow.png)
+
+Grolemund & Wickham, 2017, **[R for Data Science](https://r4ds.had.co.nz/)**
+
+---
+class: inverse, center, middle
+
+# Worked example with sports data
+## Winter Olympics medallists 1924–2014
 
 ---
 
 <br />
-Demo 1 uses the `winter` data set downloadable from this link: https://www.kaggle.com/the-guardian/olympic-games/data
-
-It includes all podium results from Winter Olympic Games that have taken place from 1924 to 2014, inclusive.
+This example uses a publicly available data set that includes **all podium results from the Winter Olympic Games from 1924 to 2014, inclusive**.
 
 <center>
 <img src="https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/ChloeKim.jpg" width="600px" />
 </center>
 
+--
+
+The `winter` data set is downloadable from this link:  
+**[https://www.kaggle.com/the-guardian/olympic-games/data](https://www.kaggle.com/the-guardian/olympic-games/data)**
+
+---
+class: inverse, center, middle
+
+# 'Start with the end in mind.'
+
+---
+class: center, middle
+
+## **How many gold medals** were won by
+## **Canada, Norway, and Sweden** at the
+## **last five Winter Olympic Games**, up to 2014?
+
 ---
 
-# Import the data
+<br />
+To answer this question, we will use R to create this **data table**...
 
-``` {r demo1_import_data, message = FALSE}
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/demo1_data_table.PNG)
+
+---
+
+<br />
+...and this **data plot**!
+
+---
+
+## Import the data
+
+``` {r demo1_import_data_part_1, message = FALSE}
 
 # The {readr} package is efficient for reading (importing) CSVs
 library(readr)
 
-# Read the data in
+# Import the data into your R session
 winter <- read_csv(
   here("data/winter.csv"), col_names = TRUE, col_types = NULL)
 
@@ -171,7 +214,37 @@ winter <- read_csv(
 
 ---
 
-# Check the data
+## Import the data
+
+``` {r demo1_import_data_part_2, eval = FALSE}
+
+# The {readr} package is efficient for reading (importing) CSVs
+library(readr) #<<
+
+# Import the data into your R session
+winter <- read_csv(
+  here("data/winter.csv"), col_names = TRUE, col_types = NULL)
+
+```
+
+---
+
+## Import the data
+
+``` {r demo1_import_data_part_3, eval = FALSE}
+
+# The {readr} package is efficient for reading (importing) CSVs
+library(readr)
+
+# Import the data into your R session
+winter <- read_csv(                                            #<<
+  here("data/winter.csv"), col_names = TRUE, col_types = NULL) #<<
+
+```
+
+---
+
+## Check the data
 
 ``` {r demo1_check_data, eval = FALSE}
 
@@ -192,9 +265,9 @@ head(winter)
 
 ---
 
-# Subset the data
+## Subset the data
 
-Let's say we are interested in comparing the **number of gold medals won** by **Canada, Norway, and Sweden** from the **last five Winter Olympic Games**.
+Remember our motivating question: **How many gold medals** were won by **Canada, Norway, and Sweden** at the **last five Winter Olympic Games**, up to 2014?
 
 --
 
@@ -208,16 +281,16 @@ We need to subset the data to focus only on:
 
 --
 
-- Results from the last five Winter Olympics (1998 to 2014)
+- Results from the five Winter Olympics between 1998 to 2014, inclusive.
 
 ---
 
-# Subset the data
+## Subset the data
 
-``` {r demo1_subset_data}
+``` {r demo1_subset_data_part_1, warning = FALSE, message = FALSE}
 
 # The {dplyr} package includes useful data manipulation functions
-library(dplyr)
+library(dplyr) #<<
 
 # Subset the data
 gold_medal_comparison <- winter %>%
@@ -229,17 +302,52 @@ gold_medal_comparison <- winter %>%
 
 ---
 
-# Check the data
+## Subset the data
 
-``` {r demo1_check_subset}
+``` {r demo1_subset_data_part_2, eval = FALSE}
 
-gold_medal_comparison
+# The {dplyr} package includes useful data manipulation functions
+library(dplyr)
+
+# Subset the data
+gold_medal_comparison <- winter %>%            #<<
+  filter(Medal == "Gold"
+         & Country %in% c("CAN", "NOR", "SWE")
+         & Year >= 1998)
 
 ```
 
 ---
 
-# Wrangle the data
+## Subset the data
+
+``` {r demo1_subset_data_part_3, eval = FALSE}
+
+# The {dplyr} package includes useful data manipulation functions
+library(dplyr)
+
+# Subset the data
+gold_medal_comparison <- winter %>%
+  filter(Medal == "Gold"                       #<<
+         & Country %in% c("CAN", "NOR", "SWE") #<<
+         & Year >= 1998)                       #<<
+
+```
+
+---
+
+## Check the data
+
+``` {r demo1_check_subset}
+
+head(gold_medal_comparison,
+     n = 9) #<<
+
+```
+
+---
+
+## Wrangle the data
 
 In the `winter` data set, the data is structured such that **one row is one medal-winning athlete**.
 
@@ -247,7 +355,7 @@ However...
 
 --
 
-- Team events (e.g., bobsleigh) comprise multiple athletes, and
+- Team events (e.g., bobsleigh, curling) comprise multiple athletes, and
 
 --
 
@@ -259,26 +367,66 @@ For this analysis, we need to wrangle the data to get it into a format where **o
 
 ---
 
-# Wrangle the data
+## Wrangle the data
 
 ``` {r demo1_wrangle_data_part_1}
 
 # Create a new variable to identify each unique event
-gold_medal_comparison$unique_event_ID <-
+gold_medal_comparison$unique_event_ID <- #<<
   paste(gold_medal_comparison$Year,
         gold_medal_comparison$Sport,
         gold_medal_comparison$Discipline,
         gold_medal_comparison$Country,
         gold_medal_comparison$Gender,
-        gold_medal_comparison$Event, sep="_")
+        gold_medal_comparison$Event,
+        sep = "_")
 
 ```
 
 ---
 
-# Wrangle the data
+## Wrangle the data
 
-``` {r demo1_wrangle_data_part_2}
+``` {r demo1_wrangle_data_part_2, eval = FALSE}
+
+# Create a new variable to identify each unique event
+gold_medal_comparison$unique_event_ID <-
+  paste(gold_medal_comparison$Year,           #<<
+        gold_medal_comparison$Sport,          #<<
+        gold_medal_comparison$Discipline,     #<<
+        gold_medal_comparison$Country,        #<<
+        gold_medal_comparison$Gender,         #<<
+        gold_medal_comparison$Event,          #<<
+        sep = "_")                            #<<
+
+```
+
+---
+
+## Wrangle the data
+
+``` {r demo1_wrangle_data_part_3a, eval = FALSE}
+
+gold_medal_comparison %>%
+  select(unique_event_ID) #<<
+
+```
+
+--
+
+``` {r demo1_wrangle_data_part_3b, echo = FALSE}
+
+# This code chunk will evaluate but not display
+gold_medal_comparison %>%
+  select(unique_event_ID)
+
+```
+
+---
+
+## Wrangle the data
+
+``` {r demo1_wrangle_data_part_3c, highlight.output = c(6,7)}
 
 gold_medal_comparison %>%
   select(unique_event_ID)
@@ -287,58 +435,171 @@ gold_medal_comparison %>%
 
 ---
 
-# Wrangle the data
+## Wrangle the data
 
-``` {r demo1_wrangle_data_part_3}
+``` {r demo1_wrangle_data_part_3d, highlight.output = c(8:12)}
+
+gold_medal_comparison %>%
+  select(unique_event_ID)
+
+```
+
+---
+
+## Wrangle the data
+
+``` {r demo1_wrangle_data_part_4a, eval = FALSE}
+
+# Identify duplicates
+gold_medal_comparison %>%
+  mutate(duplicates = duplicated(unique_event_ID)) %>% #<<
+  select(unique_event_ID, duplicates) %>%
+  head(n = 7)
+
+```
+
+--
+
+``` {r demo1_wrangle_data_part_4b, echo = FALSE}
+
+# This code chunk will evaluate but not display
 
 # Identify duplicates
 gold_medal_comparison %>%
   mutate(duplicates = duplicated(unique_event_ID)) %>%
-  select(unique_event_ID, duplicates)
+  select(unique_event_ID, duplicates) %>%
+  head(n = 7)
 
 ```
 
 ---
 
-# Wrangle the data
+## Wrangle the data
 
-``` {r demo1_wrangle_data_part_4}
+``` {r demo1_wrangle_data_part_4c, highlight.output = c(7,9,10)}
 
-# Remove duplicates from the data and
-# remove temporary variables used to identify duplicates
+# Identify duplicates
 gold_medal_comparison %>%
   mutate(duplicates = duplicated(unique_event_ID)) %>%
-  filter(duplicates == FALSE) %>%       #<<
-  select(-unique_event_ID, -duplicates) #<<
+  select(unique_event_ID, duplicates) %>%
+  head(n = 7)
 
 ```
 
 ---
 
-# Wrangle the data
+## Wrangle the data
 
-``` {r demo1_wrangle_data_part_5}
+``` {r demo1_wrangle_data_part_5a, eval = FALSE}
 
-gold_medal_comparison %>%
-  select(Year, Sport, Country, Event)
+# Remove duplicates from the data
+gold_medal_comparison <- gold_medal_comparison %>%     #<<
+  mutate(duplicates = duplicated(unique_event_ID)) %>%
+  filter(duplicates == FALSE) %>%
+  select(Year, City, Sport, Country, Event, Medal)
 
 ```
 
 ---
 
-# Calculate summary statistics
+## Wrangle the data
 
-The data is now in a format that is ready for calculating summary statistics.
+``` {r demo1_wrangle_data_part_5b, eval = FALSE}
 
-For instance, we can tabulate the total number of gold medals won by Canada, Norway, and Sweden at each of the Winter Games since 1998.
+# Remove duplicates from the data
+gold_medal_comparison <- gold_medal_comparison %>%
+  mutate(duplicates = duplicated(unique_event_ID)) %>% #<<
+  filter(duplicates == FALSE) %>%
+  select(Year, City, Sport, Country, Event, Medal)
+
+```
 
 ---
 
-# Calculate summary statistics
+## Wrangle the data
+
+``` {r demo1_wrangle_data_part_5c, eval = FALSE}
+
+# Remove duplicates from the data
+gold_medal_comparison <- gold_medal_comparison %>%
+  mutate(duplicates = duplicated(unique_event_ID)) %>%
+  filter(duplicates == FALSE) %>%                      #<<
+  select(Year, City, Sport, Country, Event, Medal)     #<<
+
+```
+
+--
+
+``` {r demo1_wrangle_data_part_5d, echo = FALSE}
+
+# This code chunk will evaluate but not display
+
+# Remove duplicates from the data
+gold_medal_comparison <- gold_medal_comparison %>%
+  mutate(duplicates = duplicated(unique_event_ID)) %>%
+  filter(duplicates == FALSE) %>%
+  select(Year, City, Sport, Country, Event, Medal)
+
+# Check the data
+head(gold_medal_comparison)
+
+```
+
+---
+
+## Wrangle the data
+
+``` {r demo1_wrangle_data_part_5e, eval = FALSE}
+
+# Remove duplicates from the data
+gold_medal_comparison <- gold_medal_comparison %>%
+  mutate(duplicates = duplicated(unique_event_ID)) %>%
+  filter(duplicates == FALSE) %>%
+  select(Year, City, Sport, Country, Event, Medal)
+
+```
+
+``` {r demo1_wrangle_data_part_5f, echo = FALSE, highlight.output = c(6)}
+
+# Check the data
+head(gold_medal_comparison)
+
+```
+
+---
+
+## Wrangle the data
+
+``` {r demo1_wrangle_data_part_5g, eval = FALSE}
+
+# Remove duplicates from the data
+gold_medal_comparison <- gold_medal_comparison %>%
+  mutate(duplicates = duplicated(unique_event_ID)) %>%
+  filter(duplicates == FALSE) %>%
+  select(Year, City, Sport, Country, Event, Medal)
+
+```
+
+``` {r demo1_wrangle_data_part_5h, echo = FALSE, highlight.output = c(7)}
+
+# Check the data
+head(gold_medal_comparison)
+
+```
+
+---
+
+## Calculate summary statistics
+
+Now that we have tidied up the data into the format we need, we can calculate the **total number of gold medals** won by **Canada, Norway, and Sweden** at each of the **Winter Games between 1998 and 2014**.
+
+---
+
+## Calculate summary statistics
 
 ``` {r demo1_summary_stats_part_1, message = FALSE}
 
-# The reshape2 package is useful for manipulating data
+# The {reshape2} package is useful for manipulating data
 # from long-to-wide format and vice versa
 library(reshape2)
 
@@ -358,7 +619,7 @@ gold_medal_totals_wide <- dcast(
 
 ---
 
-# Calculate summary statistics
+## Calculate summary statistics
 
 ``` {r demo1_summary_stats_part_2}
 
@@ -379,21 +640,22 @@ gold_medal_totals_wide[is.na(gold_medal_totals_wide)] <- 0
 
 ---
 
-# Display summary statistics
+## Display summary statistics
 
 ``` {r demo1_summary_stats_part_4, eval = FALSE}
 
-# The DT package is used to display interactive tables in HTML documents
+# The {DT} package is used to display interactive tables in HTML documents
 library(DT)
 
-# Display the table
-datatable(gold_medal_totals_wide, options = list(dom = 't'), rownames = FALSE)
+# Display the totals in a table
+datatable(gold_medal_totals_wide,
+          options = list(dom = 't'), rownames = FALSE)
 
 ```
 
 ---
 
-# Display summary statistics
+## Display summary statistics
 
 ``` {r demo1_summary_stats_part_5, eval = TRUE, echo = FALSE, warning = FALSE}
 
@@ -411,37 +673,49 @@ datatable(gold_medal_totals_wide,
 
 ---
 
-# Calculate summary statistics
+## Plot the data
 
-We can use the data frame we've just created - gold medal totals per team per Games - to calculate the median number of gold medals won by Canada, Norway, and Sweden at the last five Games.
+We can also plot the gold medal totals we've calculated, which may be more useful as a visual comparison between countries and over time.
 
-``` {r demo1_summary_stats_part_6}
+--
 
-gold_medal_medians <- gold_medal_totals_wide %>%
-  summarise(CAN = median(CAN),
-            NOR = median(NOR),
-            SWE = median(SWE))
+To create the plot, we will use:
+- The `ggplot2` R package
+- The `gold_medal_totals` data that we created earlier, in long format.
 
-gold_medal_medians
+--
+
+The **gg** in `ggplot2` stands for **[Grammar of Graphics](https://ggplot2.tidyverse.org/)**, the theoretical foundation for how the package works.
+
+---
+
+## Plot the data
+
+``` {r demo1_build_plot}
+
+# The {ggplot2} package is a powerful and fully featured
+# R package for creating data visualisations
+library(ggplot2)
+
+# Build the plot
+p <- ggplot(data = gold_medal_totals,
+            aes(x = Year, y = gold_medal_total,
+                fill = Country))
+p <- p + facet_wrap(~Country, nrow = 1)
+p <- p + geom_bar(stat = "identity")
 
 ```
 
 ---
 
-# Section subheader
+``` {r demo1_display_plot, echo = FALSE, fig.width = 16, fig.height = 8}
 
-Slide body text
-
-``` {r eval = FALSE, tidy = FALSE}
-
-# Some code I put here for aesthetic purposes ----------------------------------
-
-devtools::install_github("yihui/xaringan")
+p
 
 ```
 
 ---
-class: inverse, center, bottom
+class: inverse, center, middle
 
 # Developing data proficiency
 
