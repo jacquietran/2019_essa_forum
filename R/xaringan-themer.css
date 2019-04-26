@@ -17,7 +17,7 @@
  *
  * ------------------------------------------------------- */
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,400i,400b);
-@import url(https://fonts.googleapis.com/css?family=Amatic+SC:400b);
+@import url(https://fonts.googleapis.com/css?family=Walter+Turncoat);
 @import url(https://fonts.googleapis.com/css?family=Droid+Mono);
 
 
@@ -27,8 +27,8 @@ body {
   color: #151C2A;
 }
 h1, h2, h3 {
-  font-family: Amatic SC;
-  font-weight: bold;
+  font-family: Walter Turncoat;
+  font-weight: normal;
   color: #1F283D;
 }
 .remark-slide-content {
@@ -40,13 +40,13 @@ h1, h2, h3 {
   padding: 0em 2em 1em 2em;
 }
 .remark-slide-content h1 {
-    font-size: 80px;
+    font-size: 65px;
 }
 .remark-slide-content h2 {
-    font-size: 60px;
+    font-size: 50px;
 }
 .remark-slide-content h3 {
-    font-size: 50px;
+    font-size: 40px;
 }
 .remark-code, .remark-inline-code {
   font-family: Droid Mono, 'Lucida Console', Monaco, monospace;
