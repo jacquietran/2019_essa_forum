@@ -18,7 +18,6 @@ options(htmltools.dir.version = FALSE)
 
 # Load libraries ---------------------------------------------------------------
 
-library(here)
 library(ghibli)
 library(xaringanthemer)
 
@@ -203,22 +202,12 @@ To answer this question, we will use R to create this **data table**...
 
 ## Import the data
 
-``` {r demo1_import_data_part_1, message = FALSE}
+``` {r demo1_import_data_part_1a, message = FALSE, warning = FALSE}
 
-# The {readr} package is efficient for reading (importing) CSVs
-library(readr)
-
-# Import the data into your R session
-winter <- read_csv(
-  here("data/winter.csv"), col_names = TRUE, col_types = NULL)
-
-```
-
----
-
-## Import the data
-
-``` {r demo1_import_data_part_2, eval = FALSE}
+# The {here} package helps point to a PROJECT-specific file directory,
+# rather than a location specific to YOUR personal computer, like:
+# C:\Users\Jacquie\Documents
+library(here) #<<
 
 # The {readr} package is efficient for reading (importing) CSVs
 library(readr) #<<
@@ -233,7 +222,12 @@ winter <- read_csv(
 
 ## Import the data
 
-``` {r demo1_import_data_part_3, eval = FALSE}
+``` {r demo1_import_data_part_1b, eval = FALSE}
+
+# The {here} package helps point to a PROJECT-specific file directory,
+# rather than a location specific to YOUR personal computer, like:
+# C:\Users\Jacquie\Documents
+library(here)
 
 # The {readr} package is efficient for reading (importing) CSVs
 library(readr)
@@ -369,11 +363,10 @@ For this analysis, we need to wrangle the data to get it into a format where **o
 
 ---
 
-## Wrangle the data
+## Create a new 'identifier' variable
 
 ``` {r demo1_wrangle_data_part_1}
 
-# Create a new variable to identify each unique event
 gold_medal_comparison$unique_event_ID <- #<<
   paste(gold_medal_comparison$Year,
         gold_medal_comparison$Sport,
@@ -387,11 +380,10 @@ gold_medal_comparison$unique_event_ID <- #<<
 
 ---
 
-## Wrangle the data
+## Create a new 'identifier' variable
 
 ``` {r demo1_wrangle_data_part_2, eval = FALSE}
 
-# Create a new variable to identify each unique event
 gold_medal_comparison$unique_event_ID <-
   paste(gold_medal_comparison$Year,           #<<
         gold_medal_comparison$Sport,          #<<
@@ -405,7 +397,7 @@ gold_medal_comparison$unique_event_ID <-
 
 ---
 
-## Wrangle the data
+## Check the new variable
 
 ``` {r demo1_wrangle_data_part_3a, eval = FALSE}
 
@@ -426,7 +418,7 @@ gold_medal_comparison %>%
 
 ---
 
-## Wrangle the data
+## Check the new variable
 
 ``` {r demo1_wrangle_data_part_3c, highlight.output = c(6,7)}
 
@@ -437,7 +429,7 @@ gold_medal_comparison %>%
 
 ---
 
-## Wrangle the data
+## Check the new variable
 
 ``` {r demo1_wrangle_data_part_3d, highlight.output = c(8:12)}
 
@@ -448,11 +440,10 @@ gold_medal_comparison %>%
 
 ---
 
-## Wrangle the data
+## Identify duplicate event IDs
 
 ``` {r demo1_wrangle_data_part_4a, eval = FALSE}
 
-# Identify duplicates
 gold_medal_comparison %>%
   mutate(duplicates = duplicated(unique_event_ID)) %>% #<<
   select(unique_event_ID, duplicates) %>%
@@ -465,8 +456,6 @@ gold_medal_comparison %>%
 ``` {r demo1_wrangle_data_part_4b, echo = FALSE}
 
 # This code chunk will evaluate but not display
-
-# Identify duplicates
 gold_medal_comparison %>%
   mutate(duplicates = duplicated(unique_event_ID)) %>%
   select(unique_event_ID, duplicates) %>%
@@ -476,11 +465,10 @@ gold_medal_comparison %>%
 
 ---
 
-## Wrangle the data
+## Identify duplicate event IDs
 
 ``` {r demo1_wrangle_data_part_4c, highlight.output = c(7,9,10)}
 
-# Identify duplicates
 gold_medal_comparison %>%
   mutate(duplicates = duplicated(unique_event_ID)) %>%
   select(unique_event_ID, duplicates) %>%
@@ -490,11 +478,10 @@ gold_medal_comparison %>%
 
 ---
 
-## Wrangle the data
+## Omit rows with duplicate IDs
 
 ``` {r demo1_wrangle_data_part_5a, eval = FALSE}
 
-# Remove duplicates from the data
 gold_medal_comparison <- gold_medal_comparison %>%     #<<
   mutate(duplicates = duplicated(unique_event_ID)) %>%
   filter(duplicates == FALSE) %>%
@@ -504,11 +491,10 @@ gold_medal_comparison <- gold_medal_comparison %>%     #<<
 
 ---
 
-## Wrangle the data
+## Omit rows with duplicate IDs
 
 ``` {r demo1_wrangle_data_part_5b, eval = FALSE}
 
-# Remove duplicates from the data
 gold_medal_comparison <- gold_medal_comparison %>%
   mutate(duplicates = duplicated(unique_event_ID)) %>% #<<
   filter(duplicates == FALSE) %>%
@@ -518,11 +504,10 @@ gold_medal_comparison <- gold_medal_comparison %>%
 
 ---
 
-## Wrangle the data
+## Omit rows with duplicate IDs
 
 ``` {r demo1_wrangle_data_part_5c, eval = FALSE}
 
-# Remove duplicates from the data
 gold_medal_comparison <- gold_medal_comparison %>%
   mutate(duplicates = duplicated(unique_event_ID)) %>%
   filter(duplicates == FALSE) %>%                      #<<
@@ -535,8 +520,6 @@ gold_medal_comparison <- gold_medal_comparison %>%
 ``` {r demo1_wrangle_data_part_5d, echo = FALSE}
 
 # This code chunk will evaluate but not display
-
-# Remove duplicates from the data
 gold_medal_comparison <- gold_medal_comparison %>%
   mutate(duplicates = duplicated(unique_event_ID)) %>%
   filter(duplicates == FALSE) %>%
@@ -549,11 +532,10 @@ head(gold_medal_comparison)
 
 ---
 
-## Wrangle the data
+## Omit rows with duplicate IDs
 
 ``` {r demo1_wrangle_data_part_5e, eval = FALSE}
 
-# Remove duplicates from the data
 gold_medal_comparison <- gold_medal_comparison %>%
   mutate(duplicates = duplicated(unique_event_ID)) %>%
   filter(duplicates == FALSE) %>%
@@ -570,11 +552,10 @@ head(gold_medal_comparison)
 
 ---
 
-## Wrangle the data
+## Omit rows with duplicate IDs
 
 ``` {r demo1_wrangle_data_part_5g, eval = FALSE}
 
-# Remove duplicates from the data
 gold_medal_comparison <- gold_medal_comparison %>%
   mutate(duplicates = duplicated(unique_event_ID)) %>%
   filter(duplicates == FALSE) %>%
@@ -818,17 +799,13 @@ Remember our motivating question: **How many gold medals** were won by **Canada,
 ---
 
 <br />
-...we will learn how to create **this plot**:
+...we can use the table of gold medal totals to produce **this plot**, using a popular R package called `ggplot2`:
 
 ![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/demo1_data_plot.png)
 
 ---
 
-## Plot the data
-
-To create the plot, we will use:
-- The `gold_medal_totals` data that we created earlier, in long format.
-- The `ggplot2` R package
+## gg = Grammar of Graphics
 
 ``` {r load_ggplot2, message = FALSE, warning = FALSE}
 
@@ -838,15 +815,7 @@ library(ggplot2)
 
 ```
 
----
-
-## gg = Grammar of Graphics
-
 `ggplot2` draws upon a **layered Grammar of Graphics** as a theoretical foundation for how to make plots (Wilkinson et al., 2005; Wickham, 2010).
-
---
-
-Think of it like breaking down a plot to its most basic elements...
 
 .footnote[
 [1] Wilkinson et al., 2005, _['The Grammar of Graphics'](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448)_.
@@ -1374,11 +1343,41 @@ class: inverse, center, middle
 ---
 class: inverse, center, middle
 
-# Developing data proficiency
+# Develop your data proficiency
+## Resources to get you started
+
+---
+
+- [**Installing R and RStudio**](https://rstudio-education.github.io/hopr/starting.html)
+
+  From the [**Hands on Programming with R**](https://rstudio-education.github.io/hopr/) book by Garrett Grolemund (@StatGarrett).
+  
+--
+
+- [**STAT 545: Data wrangling, exploration, and analysis with R**](https://stat545.com/)
+  
+  Open course materials produced by faculty at the University of British Columbia
+
+--
+
+- [**Chromebook Data Science**](https://jhudatascience.org/chromebookdatascience/)
+  
+  Open course materials produced by faculty at Johns Hopkins University
+  
+--
+
+- [**R for Data Science**](https://r4ds.had.co.nz/)
+  
+  Book written by Garrett Grolemund (@StatGarrett) & Hadley Wickham (@hadleywickham). Free online, hard copy available for purchase.
 
 ---
 class: center, middle
 
 # Thanks!
 
-Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+Presentation slides here:
+[**LINK TO SLIDES GOES HERE**]()
+
+Full suite of materials (code, data) online:  
+[**https://github.com/jacquietran/2019_essa_forum**](https://github.com/jacquietran/2019_essa_forum)
+

@@ -189,20 +189,11 @@ To answer this question, we will use R to create this **data table**...
 
 
 ```r
-# The {readr} package is efficient for reading (importing) CSVs
-library(readr)
+# The {here} package helps point to a PROJECT-specific file directory,
+# rather than a location specific to YOUR personal computer, like:
+# C:\Users\Jacquie\Documents
+*library(here)
 
-# Import the data into your R session
-winter &lt;- read_csv(
-  here("data/winter.csv"), col_names = TRUE, col_types = NULL)
-```
-
----
-
-## Import the data
-
-
-```r
 # The {readr} package is efficient for reading (importing) CSVs
 *library(readr)
 
@@ -217,6 +208,11 @@ winter &lt;- read_csv(
 
 
 ```r
+# The {here} package helps point to a PROJECT-specific file directory,
+# rather than a location specific to YOUR personal computer, like:
+# C:\Users\Jacquie\Documents
+library(here)
+
 # The {readr} package is efficient for reading (importing) CSVs
 library(readr)
 
@@ -364,11 +360,10 @@ For this analysis, we need to wrangle the data to get it into a format where **o
 
 ---
 
-## Wrangle the data
+## Create a new 'identifier' variable
 
 
 ```r
-# Create a new variable to identify each unique event
 *gold_medal_comparison$unique_event_ID &lt;-
   paste(gold_medal_comparison$Year,
         gold_medal_comparison$Sport,
@@ -381,11 +376,10 @@ For this analysis, we need to wrangle the data to get it into a format where **o
 
 ---
 
-## Wrangle the data
+## Create a new 'identifier' variable
 
 
 ```r
-# Create a new variable to identify each unique event
 gold_medal_comparison$unique_event_ID &lt;-
 * paste(gold_medal_comparison$Year,
 *       gold_medal_comparison$Sport,
@@ -398,7 +392,7 @@ gold_medal_comparison$unique_event_ID &lt;-
 
 ---
 
-## Wrangle the data
+## Check the new variable
 
 
 ```r
@@ -428,7 +422,7 @@ gold_medal_comparison %&gt;%
 
 ---
 
-## Wrangle the data
+## Check the new variable
 
 
 ```r
@@ -455,7 +449,7 @@ gold_medal_comparison %&gt;%
 
 ---
 
-## Wrangle the data
+## Check the new variable
 
 
 ```r
@@ -482,11 +476,10 @@ gold_medal_comparison %&gt;%
 
 ---
 
-## Wrangle the data
+## Identify duplicate event IDs
 
 
 ```r
-# Identify duplicates
 gold_medal_comparison %&gt;%
 * mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
   select(unique_event_ID, duplicates) %&gt;%
@@ -511,11 +504,10 @@ gold_medal_comparison %&gt;%
 
 ---
 
-## Wrangle the data
+## Identify duplicate event IDs
 
 
 ```r
-# Identify duplicates
 gold_medal_comparison %&gt;%
   mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
   select(unique_event_ID, duplicates) %&gt;%
@@ -537,11 +529,10 @@ gold_medal_comparison %&gt;%
 
 ---
 
-## Wrangle the data
+## Omit rows with duplicate IDs
 
 
 ```r
-# Remove duplicates from the data
 *gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
   mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
   filter(duplicates == FALSE) %&gt;%
@@ -550,11 +541,10 @@ gold_medal_comparison %&gt;%
 
 ---
 
-## Wrangle the data
+## Omit rows with duplicate IDs
 
 
 ```r
-# Remove duplicates from the data
 gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
 * mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
   filter(duplicates == FALSE) %&gt;%
@@ -563,11 +553,10 @@ gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
 
 ---
 
-## Wrangle the data
+## Omit rows with duplicate IDs
 
 
 ```r
-# Remove duplicates from the data
 gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
   mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
 * filter(duplicates == FALSE) %&gt;%
@@ -591,11 +580,10 @@ gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
 
 ---
 
-## Wrangle the data
+## Omit rows with duplicate IDs
 
 
 ```r
-# Remove duplicates from the data
 gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
   mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
   filter(duplicates == FALSE) %&gt;%
@@ -617,11 +605,10 @@ gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
 
 ---
 
-## Wrangle the data
+## Omit rows with duplicate IDs
 
 
 ```r
-# Remove duplicates from the data
 gold_medal_comparison &lt;- gold_medal_comparison %&gt;%
   mutate(duplicates = duplicated(unique_event_ID)) %&gt;%
   filter(duplicates == FALSE) %&gt;%
@@ -861,8 +848,8 @@ datatable(gold_medal_totals_wide,
 
 ## Display gold medal totals
 
-<div id="htmlwidget-3918af0f7ecb2e960dfb" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3918af0f7ecb2e960dfb">{"x":{"filter":"none","data":[[1998,2002,2006,2010,2014],["Nagano","Salt Lake City","Turin","Vancouver","Sochi"],[6,8,7,15,10],[10,12,2,9,12],[0,0,7,5,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>City<\/th>\n      <th>CAN<\/th>\n      <th>NOR<\/th>\n      <th>SWE<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d0d06e8483c05a388d43" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d0d06e8483c05a388d43">{"x":{"filter":"none","data":[[1998,2002,2006,2010,2014],["Nagano","Salt Lake City","Turin","Vancouver","Sochi"],[6,8,7,15,10],[10,12,2,9,12],[0,0,7,5,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>City<\/th>\n      <th>CAN<\/th>\n      <th>NOR<\/th>\n      <th>SWE<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -877,17 +864,13 @@ Remember our motivating question: **How many gold medals** were won by **Canada,
 ---
 
 &lt;br /&gt;
-...we will learn how to create **this plot**:
+...we can use the table of gold medal totals to produce **this plot**, using a popular R package called `ggplot2`:
 
 ![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/demo1_data_plot.png)
 
 ---
 
-## Plot the data
-
-To create the plot, we will use:
-- The `gold_medal_totals` data that we created earlier, in long format.
-- The `ggplot2` R package
+## gg = Grammar of Graphics
 
 
 ```r
@@ -896,15 +879,7 @@ To create the plot, we will use:
 library(ggplot2)
 ```
 
----
-
-## gg = Grammar of Graphics
-
 `ggplot2` draws upon a **layered Grammar of Graphics** as a theoretical foundation for how to make plots (Wilkinson et al., 2005; Wickham, 2010).
-
---
-
-Think of it like breaking down a plot to its most basic elements...
 
 .footnote[
 [1] Wilkinson et al., 2005, _['The Grammar of Graphics'](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448)_.
@@ -1258,14 +1233,43 @@ class: inverse, center, middle
 ---
 class: inverse, center, middle
 
-# Developing data proficiency
+# Develop your data proficiency
+## Resources to get you started
+
+---
+
+- [**Installing R and RStudio**](https://rstudio-education.github.io/hopr/starting.html)
+
+  From the [**Hands on Programming with R**](https://rstudio-education.github.io/hopr/) book by Garrett Grolemund (@StatGarrett).
+  
+--
+
+- [**STAT 545: Data wrangling, exploration, and analysis with R**](https://stat545.com/)
+  
+  Open course materials produced by faculty at the University of British Columbia
+
+--
+
+- [**Chromebook Data Science**](https://jhudatascience.org/chromebookdatascience/)
+  
+  Open course materials produced by faculty at Johns Hopkins University
+  
+--
+
+- [**R for Data Science**](https://r4ds.had.co.nz/)
+  
+  Book written by Garrett Grolemund (@StatGarrett) &amp; Hadley Wickham (@hadleywickham). Free online, hard copy available for purchase.
 
 ---
 class: center, middle
 
 # Thanks!
 
-Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+Presentation slides here:
+[**LINK TO SLIDES GOES HERE**]()
+
+Full suite of materials (code, data) online:  
+[**https://github.com/jacquietran/2019_essa_forum**](https://github.com/jacquietran/2019_essa_forum)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
