@@ -40,7 +40,7 @@ clean_data <- clean_data %>%
 measure_names <- clean_data %>%
   mutate(measure = case_when(
     is.na(age_15_17) == TRUE ~ variable,
-    TRUE                         ~ "replace")) %>%
+    TRUE                     ~ "replace")) %>%
   select(measure)
 
 # In measure_names, revalue "replace" string with NA
@@ -79,8 +79,28 @@ measure_vec <- unique(clean_data$measure)
 
 # Separate age range data from grouped ages data
 clean_data_age <- clean_data %>%
-  select(measure, variable, starts_with("age"))
+  select(measure, variable, starts_with("age")) %>%
+  filter(!variable %in% c("Total(c)", "Total(e)"))
 clean_data_grouped <- clean_data %>%
-  select(measure, variable, starts_with("grouped"))
+  select(measure, variable, starts_with("grouped")) %>%
+  filter(!variable %in% c("Total(c)", "Total(e)"))
+
+# Subset rows with totals into distinct data frames
+clean_data_age_totals <- clean_data %>%
+  select(measure, variable, starts_with("age")) %>%
+  filter(variable %in% c("Total(c)", "Total(e)"))
+clean_data_grouped_totals <- clean_data %>%
+  select(measure, variable, starts_with("grouped")) %>%
+  filter(variable %in% c("Total(c)", "Total(e)"))
+
+# Focus on measures related to the motivating question:
+# How much exercise is done per week by Australians of varying ages?
+# (reported minutes and days of exercise in the last week)
+exercise_data_age <- clean_data_age %>%
+  filter(measure %in% c(measure_vec[4], measure_vec[7]))
+exercise_data_grouped <- clean_data_grouped %>%
+  filter(measure %in% c(measure_vec[4], measure_vec[7]))
+
+# Convert from wide to long format 
 
 # Build plot -------------------------------------------------------------------
