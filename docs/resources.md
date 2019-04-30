@@ -29,6 +29,14 @@
   
 - Stack Overflow: ['Remove parentheses and text within from strings in R'](https://stackoverflow.com/questions/24173194/remove-parentheses-and-text-within-from-strings-in-r)
 
+- Stack Overflow: ['Filtering row which contains a certain string using dplyr'](https://stackoverflow.com/questions/22850026/filtering-row-which-contains-a-certain-string-using-dplyr)
+
+## Plotting
+
+- [Color Brewer](http://colorbrewer2.org)
+
+  Useful site for generating sequential, diverging, and qualitative colour palettes.
+
 ## Creating the presentation
 
 - `xaringan` R package: [GitHub repo](https://github.com/yihui/xaringan).
