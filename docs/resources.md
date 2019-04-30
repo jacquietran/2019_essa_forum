@@ -22,6 +22,11 @@
 
 - Stack Overflow: ['Mutate multiple columns in a dataframe'](https://stackoverflow.com/questions/26219501/mutate-multiple-columns-in-a-dataframe)
 
+- `tidyr` R package: [Reference manual](https://tidyr.tidyverse.org/)
+  
+  Functions for producing tidy data (long-to-wide / wide-to-long conversions).
+  Authors: Hadley Wickham, Lionel Henry.
+
 ## Creating the presentation
 
 - `xaringan` R package: [GitHub repo](https://github.com/yihui/xaringan).
