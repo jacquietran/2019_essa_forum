@@ -26,6 +26,8 @@
   
   Functions for producing tidy data (long-to-wide / wide-to-long conversions).
   Authors: Hadley Wickham, Lionel Henry.
+  
+- Stack Overflow: ['Remove parentheses and text within from strings in R'](https://stackoverflow.com/questions/24173194/remove-parentheses-and-text-within-from-strings-in-r)
 
 ## Creating the presentation
 
