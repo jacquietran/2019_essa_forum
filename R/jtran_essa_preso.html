@@ -848,8 +848,8 @@ datatable(gold_medal_totals_wide,
 
 ## Display gold medal totals
 
-<div id="htmlwidget-d0d06e8483c05a388d43" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d0d06e8483c05a388d43">{"x":{"filter":"none","data":[[1998,2002,2006,2010,2014],["Nagano","Salt Lake City","Turin","Vancouver","Sochi"],[6,8,7,15,10],[10,12,2,9,12],[0,0,7,5,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>City<\/th>\n      <th>CAN<\/th>\n      <th>NOR<\/th>\n      <th>SWE<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-fb6116fce4111574c4be" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fb6116fce4111574c4be">{"x":{"filter":"none","data":[[1998,2002,2006,2010,2014],["Nagano","Salt Lake City","Turin","Vancouver","Sochi"],[6,8,7,15,10],[10,12,2,9,12],[0,0,7,5,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>City<\/th>\n      <th>CAN<\/th>\n      <th>NOR<\/th>\n      <th>SWE<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":[0,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -1228,7 +1228,244 @@ All done!
 class: inverse, center, middle
 
 # Worked example with exercise data
-## National Health Survey
+## National Health Survey 2017–2018
+
+---
+
+&lt;br /&gt;
+This example uses publicly available data from the Australian Bureau of Statistics, drawn from the **National Health Survey 2017–2018**.
+
+&lt;center&gt;
+&lt;img src="https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/cyclist-3202481_1920.jpg" width="600px" /&gt;
+&lt;/center&gt;
+
+--
+
+You can download the example data set used and many others from this link:  
+**[4364.0.55.001 - National Health Survey: First Results, 2017–18](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/4364.0.55.0012017-18?OpenDocument)**
+
+---
+class: inverse, center, middle
+
+# 'Start with the end in mind.'
+
+---
+class: center, middle
+
+## Among **Australians aged 15 years and older**,
+## **how much physical activity** do they engage in
+## (**minutes per week**)?
+
+---
+
+To answer this question, we will use R to create this **data plot**:
+
+---
+
+## Import the data
+
+The Australian Bureau of Statistics typically provides data sets in _.xls_ format (MS Excel 1997-2003 spreadsheet).
+
+
+```r
+# If we were starting a new R session, we would need to
+# re-load the {here} package using the command
+*# library(here)
+
+# The {readxl} R package efficiently imports Excel spreadsheets into R
+library(readxl)
+```
+
+---
+
+## Import the data
+
+The Australian Bureau of Statistics typically provides data sets in _.xls_ format (MS Excel 1997-2003 spreadsheet).
+
+
+```r
+# If we were starting a new R session, we would need to
+# re-load the {here} package using the command
+# library(here)
+
+# The {readxl} R package efficiently imports Excel spreadsheets into R
+*library(readxl)
+```
+
+---
+
+## Import the data
+
+
+```r
+# Import the data into your R session
+activity_data &lt;- read_excel(
+  here("data/4364055001do013_20172018.xls"),
+  sheet = "Table 13.1_Estimates, persons",
+  range = "A21:L26", col_names = FALSE)
+```
+
+---
+class: center, middle
+
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/demo2_data_screenshot.PNG)
+
+---
+
+## Import the data
+
+
+```r
+# Import the data headers (column names into your R session)
+headers &lt;- read_excel(
+  here("data/4364055001do013_20172018.xls"),
+  sheet = "Table 13.1_Estimates, persons",
+  range = "B7:L7", col_names = FALSE)
+```
+
+---
+class: center, middle
+
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/demo2_header_screenshot.PNG)
+
+---
+
+## Clean the data
+
+
+```r
+# Define column names by referring to headers data frame
+colnames(activity_data) &lt;- c(
+  "duration", "age_15_17", "age_18_24", "age_25_34", "age_35_44", "age_45_54",
+  "age_55_64", "age_65_74", "drop1", "drop2", "age_75_84", "age_85_plus")
+```
+
+---
+
+## Clean the data
+
+
+```r
+library(dplyr)
+
+# Drop unnecessary columns
+activity_data &lt;- activity_data %&gt;%
+  select(-starts_with("drop"))
+```
+
+---
+
+## Clean the data
+
+
+```r
+library(stringr)
+
+# Remove footnote references
+activity_data &lt;- activity_data %&gt;%
+  mutate(duration = str_replace(duration, "\\(.*\\)", "")) %&gt;%
+  mutate(duration = str_trim(duration, side = "both"))
+```
+
+---
+
+## Subset the data
+
+
+```r
+library(tidyr)
+
+# Extract age segment totals to separate data frame
+# and convert wide to long
+age_segment_totals &lt;- activity_data %&gt;%
+  filter(duration == "Total") %&gt;%
+  gather("segment", "resp_estimate", -duration) %&gt;%
+  select(-duration)
+```
+
+---
+
+## Wrangle the data
+
+
+```r
+# Remove rows that present totals data (different scale!)
+# and convert wide to long
+activity_data_long &lt;- activity_data %&gt;%
+  filter(!grepl("Total", duration)) %&gt;%
+  gather("segment", "estimate", -duration)
+```
+
+---
+
+## Wrangle the data
+
+
+```r
+# Merge data frames together
+activity_data_long &lt;- left_join(
+  activity_data_long, age_segment_totals)
+```
+
+```
+## Joining, by = "segment"
+```
+
+---
+
+## Wrangle the data
+
+
+```r
+# Calculate estimates as percentage of respondents per age segment
+activity_data_long &lt;- activity_data_long %&gt;%
+  mutate(pct_of_resp = round(estimate / resp_estimate * 100, 1))
+```
+
+---
+
+## Wrangle the data
+
+
+```r
+# Specify factor levels in duration
+activity_data_long$duration &lt;- factor(
+  activity_data_long$duration,
+  levels = rev(unique(activity_data_long$duration)))
+```
+
+---
+
+# Build the plot
+
+
+```r
+library(ggplot2)
+
+p &lt;- ggplot(activity_data_long,
+            aes(x = duration, y = pct_of_resp,
+                fill = duration,
+                label = paste0(pct_of_resp, "%")))
+p &lt;- p + facet_wrap(vars(segment))
+p &lt;- p + geom_bar(stat = "identity")
+p &lt;- p + geom_text(hjust = -0.2)
+p &lt;- p + scale_y_continuous(
+  limits = c(0, 65),
+  breaks = seq(0, 60, by = 20))
+p &lt;- p + labs(
+  title = "~50% of Australians aged 85+ reported 0 min of physical activity in the last week",
+  caption = "Source: National Health Survey 2017–2018",
+  x = NULL, y = NULL)
+p &lt;- p + scale_fill_brewer(palette = "RdBu", direction = -1)
+p &lt;- p + coord_flip()
+p &lt;- p + theme(
+  text = element_text(size = 28),
+  legend.position = "none")
+```
+
+---
+
+![](jtran_essa_preso_files/figure-html/demo2_display_plot-1.png)&lt;!-- --&gt;
 
 ---
 class: inverse, center, middle
