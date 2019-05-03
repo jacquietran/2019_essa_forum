@@ -36,6 +36,8 @@
 - [Color Brewer](http://colorbrewer2.org)
 
   Useful site for generating sequential, diverging, and qualitative colour palettes.
+  
+- ggplot2 reference manual: ['Useful labeller functions'](https://ggplot2.tidyverse.org/reference/labellers.html)
 
 ## Creating the presentation
 
