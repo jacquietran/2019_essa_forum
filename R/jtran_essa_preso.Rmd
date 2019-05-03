@@ -10,6 +10,7 @@ output:
       highlightLines: true
       countIncrementalSlides: false
       ratio: '16:9'
+      titleSlideClass: [bottom, center]
 ---
 
 ```{r setup, include=FALSE}
@@ -38,7 +39,8 @@ mono_light(
   padding = "0em 2em 1em 2em",
   footnote_color = "#666666",
   footnote_font_size = "0.5em",
-  footnote_position_bottom = "0.5em"
+  footnote_position_bottom = "0.5em",
+  extra_css = list(".title-slide" = list("background-image" = "url(https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/titlebg.jpg)", "background-size" = "cover"))
 )
 
 ```
@@ -48,8 +50,9 @@ class: inverse, center, middle
 # 'Start with the end in mind.'
 
 ---
+background-image: url(https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/question-mark.jpg)
+background-size: cover
 
-<br />
 <br />
 
 What is the **decision** in need of evidence? (the motivating question)
@@ -69,8 +72,6 @@ Can you get **access** to all the data you ideally want to make your decision?
 --
 
 What **mistakes** are you willing to live with?
-
---
 
 .footnote[
 [1] Argyris, 1976, ['Single-loop and double-loop models in research on decision-making'](http://academic.udayton.edu/richardghere/igo%20ngo%20research/argyris.pdf), _Administrative Science Quarterly_.
@@ -1355,6 +1356,16 @@ You can download the example data set used and many others from this link:
 **[4364.0.55.001 - National Health Survey: First Results, 2017–18](https://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/4364.0.55.0012017-18?OpenDocument)**
 
 ---
+class: center, middle
+
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/demo2_menu.PNG)
+
+---
+class: center, middle
+
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/demo2_data_first_look.PNG)
+
+---
 class: inverse, center, middle
 
 # 'Start with the end in mind.'
@@ -1362,13 +1373,25 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-## Among **Australians aged 15 years and older**,
-## **how much physical activity** do they engage in
-## (**minutes per week**)?
+## **How much physical activity** do
+## **Australians aged 15 years and older**
+## engage in (**minutes per week**)?
 
 ---
 
 To answer this question, we will use R to create this **data plot**:
+
+<center>
+<img src="https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/demo2_plot.png" width="1000px" />
+</center>
+
+---
+
+## Before we carry on...
+
+It is good practice to clear your workspace and restart your R session often.
+
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/fResh_session.png)
 
 ---
 
@@ -1376,11 +1399,10 @@ To answer this question, we will use R to create this **data plot**:
 
 The Australian Bureau of Statistics typically provides data sets in _.xls_ format (MS Excel 1997-2003 spreadsheet).
 
-``` {r demo2_import_data_part1}
+``` {r demo2_import_data_part1, eval = FALSE}
 
-# If we were starting a new R session, we would need to
-# re-load the {here} package using the command
-# library(here) #<<
+# In a new R session, we would re-load the {here} package
+library(here) #<<
 
 # The {readxl} R package efficiently imports Excel spreadsheets into R
 library(readxl)
@@ -1395,9 +1417,8 @@ The Australian Bureau of Statistics typically provides data sets in _.xls_ forma
 
 ``` {r demo2_import_data_part2, eval = FALSE}
 
-# If we were starting a new R session, we would need to
-# re-load the {here} package using the command
-# library(here)
+# In a new R session, we would re-load the {here} package
+library(here)
 
 # The {readxl} R package efficiently imports Excel spreadsheets into R
 library(readxl) #<<
@@ -1408,10 +1429,16 @@ library(readxl) #<<
 
 ## Import the data
 
-``` {r demo2_import_data_part3, message = FALSE}
+``` {r demo2_import_data_part3a, echo = FALSE}
+
+library(readxl)
+
+```
+
+``` {r demo2_import_data_part3b, message = FALSE}
 
 # Import the data into your R session
-activity_data <- read_excel(
+activity_data <- read_excel( #<<
   here("data/4364055001do013_20172018.xls"),
   sheet = "Table 13.1_Estimates, persons",
   range = "A21:L26", col_names = FALSE)
@@ -1419,9 +1446,69 @@ activity_data <- read_excel(
 ```
 
 ---
+
+## Import the data
+
+``` {r demo2_import_data_part3c, message = FALSE, eval = FALSE}
+
+# Import the data into your R session
+activity_data <- read_excel(
+  here("data/4364055001do013_20172018.xls"), #<<
+  sheet = "Table 13.1_Estimates, persons",
+  range = "A21:L26", col_names = FALSE)
+
+```
+
+---
+
+## Import the data
+
+``` {r demo2_import_data_part3d, message = FALSE, eval = FALSE}
+
+# Import the data into your R session
+activity_data <- read_excel(
+  here("data/4364055001do013_20172018.xls"),
+  sheet = "Table 13.1_Estimates, persons", #<<
+  range = "A21:L26", col_names = FALSE)
+
+```
+
+---
+
+## Import the data
+
+``` {r demo2_import_data_part3e, message = FALSE, eval = FALSE}
+
+# Import the data into your R session
+activity_data <- read_excel(
+  here("data/4364055001do013_20172018.xls"),
+  sheet = "Table 13.1_Estimates, persons",
+  range = "A21:L26", col_names = FALSE) #<<
+
+```
+
+---
 class: center, middle
 
 ![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/demo2_data_screenshot.PNG)
+
+---
+
+## Check the data in R
+
+``` {r demo2_import_data_check_part1a, eval = FALSE}
+
+head(activity_data)
+
+```
+
+--
+
+``` {r demo2_import_data_check_part1b, echo = FALSE, highlight.output = c(2)}
+
+head(activity_data)
+
+```
 
 ---
 
@@ -1433,7 +1520,7 @@ class: center, middle
 headers <- read_excel(
   here("data/4364055001do013_20172018.xls"),
   sheet = "Table 13.1_Estimates, persons",
-  range = "B7:L7", col_names = FALSE)
+  range = "B7:L7", col_names = FALSE) #<<
 
 ```
 
@@ -1444,14 +1531,11 @@ class: center, middle
 
 ---
 
-## Clean the data
+## Check the data in R
 
-``` {r demo2_clean_data_part1}
+``` {r demo2_import_headers_check, highlight.output = c(4)}
 
-# Define column names by referring to headers data frame
-colnames(activity_data) <- c(
-  "duration", "age_15_17", "age_18_24", "age_25_34", "age_35_44", "age_45_54",
-  "age_55_64", "age_65_74", "drop1", "drop2", "age_75_84", "age_85_plus")
+head(headers)
 
 ```
 
@@ -1459,12 +1543,41 @@ colnames(activity_data) <- c(
 
 ## Clean the data
 
-``` {r demo2_clean_data_part2}
+``` {r demo2_clean_data_part1a}
 
+# Define column names by referring to headers data frame
+colnames(activity_data) <- c( #<<
+  "duration", "age_15_17", "age_18_24", "age_25_34", "age_35_44",
+  "age_45_54", "age_55_64", "age_65_74", "drop1", "drop2",
+  "age_75_84", "age_85_plus")
+
+```
+
+---
+
+## Clean the data
+
+``` {r demo2_clean_data_part1b, eval = FALSE}
+
+# Define column names by referring to headers data frame
+colnames(activity_data) <- c(
+  "duration", "age_15_17", "age_18_24", "age_25_34", "age_35_44",
+  "age_45_54", "age_55_64", "age_65_74", "drop1", "drop2", #<<
+  "age_75_84", "age_85_plus")
+
+```
+
+---
+
+## Clean the data
+
+``` {r demo2_clean_data_part2a}
+
+# Load {dplyr} package for data manipulation
 library(dplyr)
 
 # Drop unnecessary columns
-activity_data <- activity_data %>%
+activity_data <- activity_data %>% #<<
   select(-starts_with("drop"))
 
 ```
@@ -1473,14 +1586,124 @@ activity_data <- activity_data %>%
 
 ## Clean the data
 
-``` {r demo2_clean_data_part3}
+``` {r demo2_clean_data_part2b, eval = FALSE}
 
+# Load {dplyr} package for data manipulation
+library(dplyr)
+
+# Drop unnecessary columns
+activity_data <- activity_data %>%
+  select(-starts_with("drop")) #<<
+
+```
+
+---
+
+## Check the data
+
+``` {r demo2_clean_data_check_part1a, eval = FALSE}
+
+# Check the names of remaining columns
+names(activity_data)
+
+```
+
+--
+
+``` {r demo2_clean_data_check_part1b, echo = FALSE}
+
+# Check the names of remaining columns
+names(activity_data)
+
+```
+
+---
+
+## Check the data
+
+``` {r demo2_clean_data_check_part2a}
+
+head(activity_data)
+
+```
+
+---
+
+## Check the data
+
+``` {r demo2_clean_data_check_part2b, highlight.output = c(2)}
+
+head(activity_data)
+
+```
+
+---
+
+## Check the data
+
+``` {r demo2_clean_data_check_part2c, highlight.output = c(9)}
+
+head(activity_data)
+
+```
+
+---
+
+## Check the data
+
+``` {r demo2_clean_data_check_part2d, eval = FALSE}
+
+head(activity_data$duration)
+
+```
+
+--
+
+``` {r demo2_clean_data_check_part2e, echo = FALSE}
+
+head(activity_data$duration)
+
+```
+
+---
+
+## Clean the data
+
+``` {r demo2_clean_data_part3a}
+
+# Load the {stringr} package for string manipulation
+library(stringr)
+
+# Remove footnote references
+activity_data <- activity_data %>%
+  mutate(duration = str_replace(duration, "\\(.*\\)", "")) %>% #<<
+  mutate(duration = str_trim(duration, side = "both"))
+
+```
+
+---
+
+## Clean the data
+
+``` {r demo2_clean_data_part3b, eval = FALSE}
+
+# Load the {stringr} package for string manipulation
 library(stringr)
 
 # Remove footnote references
 activity_data <- activity_data %>%
   mutate(duration = str_replace(duration, "\\(.*\\)", "")) %>%
-  mutate(duration = str_trim(duration, side = "both"))
+  mutate(duration = str_trim(duration, side = "both")) #<<
+
+```
+
+---
+
+## Check the data
+
+``` {r demo2_clean_data_check_part3a, highlight.output = c(3)}
+
+head(activity_data$duration)
 
 ```
 
@@ -1488,13 +1711,14 @@ activity_data <- activity_data %>%
 
 ## Subset the data
 
-``` {r demo2_subset_data_part1}
+``` {r demo2_subset_data_part1a}
 
+# Load the {tidyr} package for data tidying functions
 library(tidyr)
 
 # Extract age segment totals to separate data frame
 # and convert wide to long
-age_segment_totals <- activity_data %>%
+age_segment_totals <- activity_data %>% #<<
   filter(duration == "Total") %>%
   gather("segment", "resp_estimate", -duration) %>%
   select(-duration)
@@ -1503,14 +1727,78 @@ age_segment_totals <- activity_data %>%
 
 ---
 
+## Subset the data
+
+``` {r demo2_subset_data_part1b, eval = FALSE}
+
+# Load the {tidyr} package for data tidying functions
+library(tidyr)
+
+# Extract age segment totals to separate data frame
+# and convert wide to long
+age_segment_totals <- activity_data %>%
+  filter(duration == "Total") %>% #<<
+  gather("segment", "resp_estimate", -duration) %>%
+  select(-duration)
+
+```
+
+---
+
+## Subset the data
+
+``` {r demo2_subset_data_part1c, eval = FALSE}
+
+# Load the {tidyr} package for data tidying functions
+library(tidyr)
+
+# Extract age segment totals to separate data frame
+# and convert wide to long
+age_segment_totals <- activity_data %>%
+  filter(duration == "Total") %>%
+  gather("segment", "resp_estimate", -duration) %>% #<<
+  select(-duration)
+
+```
+
+---
+
+## Subset the data
+
+``` {r demo2_subset_data_part1d, eval = FALSE}
+
+# Load the {tidyr} package for data tidying functions
+library(tidyr)
+
+# Extract age segment totals to separate data frame
+# and convert wide to long
+age_segment_totals <- activity_data %>%
+  filter(duration == "Total") %>%
+  gather("segment", "resp_estimate", -duration) %>%
+  select(-duration) #<<
+
+```
+
+---
+
+## Check the data
+
+``` {r demo2_subset_data_check}
+
+head(age_segment_totals)
+
+```
+
+---
+
 ## Wrangle the data
 
-``` {r demo2_wrangle_data_part1}
+``` {r demo2_wrangle_data_part1a}
 
 # Remove rows that present totals data (different scale!)
 # and convert wide to long
 activity_data_long <- activity_data %>%
-  filter(!grepl("Total", duration)) %>%
+  filter(!grepl("Total", duration)) %>% #<<
   gather("segment", "estimate", -duration)
 
 ```
@@ -1519,11 +1807,45 @@ activity_data_long <- activity_data %>%
 
 ## Wrangle the data
 
-``` {r demo2_wrangle_data_part2}
+``` {r demo2_wrangle_data_part1b}
+
+# Remove rows that present totals data (different scale!)
+# and convert wide to long
+activity_data_long <- activity_data %>%
+  filter(!grepl("Total", duration)) %>%
+  gather("segment", "estimate", -duration) #<<
+
+```
+
+---
+
+## Check the data
+
+``` {r demo2_wrangle_data_check_part1}
+
+head(activity_data_long)
+
+```
+
+---
+
+## Wrangle the data
+
+``` {r demo2_wrangle_data_part2, message = FALSE}
 
 # Merge data frames together
 activity_data_long <- left_join(
   activity_data_long, age_segment_totals)
+
+```
+
+---
+
+## Check the data
+
+``` {r demo2_wrangle_data_check_part2}
+
+head(activity_data_long)
 
 ```
 
@@ -1535,7 +1857,17 @@ activity_data_long <- left_join(
 
 # Calculate estimates as percentage of respondents per age segment
 activity_data_long <- activity_data_long %>%
-  mutate(pct_of_resp = round(estimate / resp_estimate * 100, 1))
+  mutate(pct_of_resp = round(estimate / resp_estimate * 100, 1)) #<<
+
+```
+
+---
+
+## Check the data
+
+``` {r demo2_wrangle_data_check_part3}
+
+head(activity_data_long)
 
 ```
 
@@ -1543,10 +1875,10 @@ activity_data_long <- activity_data_long %>%
 
 ## Wrangle the data
 
-``` {r demo2_wrangle_data_part4}
+``` {r demo2_wrangle_data_part4a}
 
 # Specify factor levels in duration
-activity_data_long$duration <- factor(
+activity_data_long$duration <- factor( #<<
   activity_data_long$duration,
   levels = rev(unique(activity_data_long$duration)))
 
@@ -1554,37 +1886,422 @@ activity_data_long$duration <- factor(
 
 ---
 
-# Build the plot
+## Wrangle the data
 
-``` {r demo2_build_plot, eval = FALSE}
+``` {r demo2_wrangle_data_part4b, eval = FALSE}
 
-library(ggplot2)
-
-p <- ggplot(activity_data_long,
-            aes(x = duration, y = pct_of_resp,
-                fill = duration,
-                label = paste0(pct_of_resp, "%")))
-p <- p + facet_wrap(vars(segment))
-p <- p + geom_bar(stat = "identity")
-p <- p + geom_text(hjust = -0.2)
-p <- p + scale_y_continuous(
-  limits = c(0, 65),
-  breaks = seq(0, 60, by = 20))
-p <- p + labs(
-  title = "~50% of Australians aged 85+ reported 0 min of physical activity in the last week",
-  caption = "Source: National Health Survey 2017–2018",
-  x = NULL, y = NULL)
-p <- p + scale_fill_brewer(palette = "RdBu", direction = -1)
-p <- p + coord_flip()
-p <- p + theme(
-  text = element_text(size = 28),
-  legend.position = "none")
+# Specify factor levels in duration
+activity_data_long$duration <- factor(
+  activity_data_long$duration, #<<
+  levels = rev(unique(activity_data_long$duration)))
 
 ```
 
 ---
 
-``` {r demo2_display_plot, echo = FALSE, fig.width = 16, fig.height = 7.5}
+## Wrangle the data
+
+``` {r demo2_wrangle_data_part4c, eval = FALSE}
+
+# Specify factor levels in duration
+activity_data_long$duration <- factor(
+  activity_data_long$duration,
+  levels = rev(unique(activity_data_long$duration))) #<<
+
+```
+
+---
+
+## Wrangle the data
+
+``` {r demo2_wrangle_data_part5a}
+
+# Specify factor levels in age segment
+activity_data_long$segment <- factor( #<<
+  activity_data_long$segment,
+  levels = unique(activity_data_long$segment),
+  labels = c("15–17", "18–24", "25–34", "35–44",
+             "45–54", "55–64", "65–74", "75–84",
+             "85+ years"))
+
+```
+
+---
+
+## Wrangle the data
+
+``` {r demo2_wrangle_data_part5b, eval = FALSE}
+
+# Specify factor levels in age segment
+activity_data_long$segment <- factor(
+  activity_data_long$segment, #<<
+  levels = unique(activity_data_long$segment),
+  labels = c("15–17", "18–24", "25–34", "35–44",
+             "45–54", "55–64", "65–74", "75–84",
+             "85+ years"))
+
+```
+
+---
+
+## Wrangle the data
+
+``` {r demo2_wrangle_data_part5c, eval = FALSE}
+
+# Specify factor levels in age segment
+activity_data_long$segment <- factor(
+  activity_data_long$segment,
+  levels = unique(activity_data_long$segment), #<<
+  labels = c("15–17", "18–24", "25–34", "35–44",
+             "45–54", "55–64", "65–74", "75–84",
+             "85+ years"))
+
+```
+
+---
+
+## Wrangle the data
+
+``` {r demo2_wrangle_data_part5d, eval = FALSE}
+
+# Specify factor levels in age segment
+activity_data_long$segment <- factor(
+  activity_data_long$segment,
+  levels = unique(activity_data_long$segment),
+  labels = c("15–17", "18–24", "25–34", "35–44", #<<
+             "45–54", "55–64", "65–74", "75–84", #<<
+             "85+ years")) #<<
+
+```
+
+---
+
+## Build the plot
+
+``` {r demo2_build_plot_part1a, eval = FALSE}
+
+# Load the {ggplot2} package for creating data visualisations
+library(ggplot2)
+
+# Define the base layers of the plot
+p <- ggplot(activity_data_long, #<<
+            aes(x = duration, y = pct_of_resp,
+                fill = duration,
+                label = paste0(pct_of_resp, "%")))
+
+```
+
+---
+
+## Build the plot
+
+``` {r demo2_build_plot_part1b, eval = FALSE}
+
+# Load the {ggplot2} package for creating data visualisations
+library(ggplot2)
+
+# Define the base layers of the plot
+p <- ggplot(activity_data_long,
+            aes(x = duration, y = pct_of_resp, #<<
+                fill = duration,
+                label = paste0(pct_of_resp, "%")))
+
+```
+
+---
+
+## Build the plot
+
+``` {r demo2_build_plot_part1c, eval = FALSE}
+
+# Load the {ggplot2} package for creating data visualisations
+library(ggplot2)
+
+# Define the base layers of the plot
+p <- ggplot(activity_data_long,
+            aes(x = duration, y = pct_of_resp,
+                fill = duration, #<<
+                label = paste0(pct_of_resp, "%")))
+
+```
+
+---
+
+## Build the plot
+
+``` {r demo2_build_plot_part1d, eval = FALSE}
+
+# Load the {ggplot2} package for creating data visualisations
+library(ggplot2)
+
+# Define the base layers of the plot
+p <- ggplot(activity_data_long,
+            aes(x = duration, y = pct_of_resp,
+                fill = duration,
+                label = paste0(pct_of_resp, "%"))) #<<
+
+```
+
+---
+
+## Define facets
+
+``` {r demo2_build_plot_part2, eval = FALSE}
+
+p <- p + facet_wrap(vars(segment))
+
+```
+
+---
+
+## Specify plot type
+
+``` {r demo2_build_plot_part3, eval = FALSE}
+
+p <- p + geom_bar(stat = "identity")
+
+```
+
+---
+
+``` {r demo2_display_plot_part1, echo = FALSE, fig.width = 16, fig.height = 8.5}
+
+p <- ggplot(activity_data_long,
+            aes(x = duration, y = pct_of_resp,
+                fill = duration,
+                label = paste0(pct_of_resp, "%")))
+p <- p + facet_wrap(vars(segment))
+p <- p + geom_bar(stat = "identity")
+
+p
+
+```
+
+---
+
+## Create data annotations
+
+``` {r demo2_build_plot_part4, eval = FALSE}
+
+p <- p + geom_text(hjust = -0.2, size = 6.5)
+
+```
+
+---
+
+``` {r demo2_display_plot_part2, echo = FALSE, fig.width = 16, fig.height = 8.5}
+
+p <- ggplot(activity_data_long,
+            aes(x = duration, y = pct_of_resp,
+                fill = duration,
+                label = paste0(pct_of_resp, "%")))
+p <- p + facet_wrap(vars(segment))
+p <- p + geom_bar(stat = "identity")
+p <- p + geom_text(hjust = -0.2, size = 6.5)
+
+p
+
+```
+
+---
+
+## Define Y axis parameters
+
+``` {r demo2_build_plot_part5, eval = FALSE}
+
+p <- p + scale_y_continuous(
+  limits = c(0, 65),
+  breaks = seq(0, 60, by = 20))
+
+```
+
+---
+
+``` {r demo2_display_plot_part3, echo = FALSE, fig.width = 16, fig.height = 8.5}
+
+p <- ggplot(activity_data_long,
+            aes(x = duration, y = pct_of_resp,
+                fill = duration,
+                label = paste0(pct_of_resp, "%")))
+p <- p + facet_wrap(vars(segment))
+p <- p + geom_bar(stat = "identity")
+p <- p + geom_text(hjust = -0.1, size = 6.5)
+p <- p + scale_y_continuous(
+  limits = c(0, 70),
+  breaks = seq(0, 60, by = 20))
+
+p
+
+```
+
+---
+
+## Add title and caption
+
+``` {r demo2_build_plot_part6, eval = FALSE}
+
+p <- p + labs(
+  title = "~50% of Australians aged 85+ reported 0 min of\nphysical activity in the last week",
+  caption = "Source: National Health Survey 2017–2018",
+  x = NULL, y = NULL)
+
+```
+
+---
+
+``` {r demo2_display_plot_part4, echo = FALSE, fig.width = 16, fig.height = 8.5}
+
+p <- ggplot(activity_data_long,
+            aes(x = duration, y = pct_of_resp,
+                fill = duration,
+                label = paste0(pct_of_resp, "%")))
+p <- p + facet_wrap(vars(segment))
+p <- p + geom_bar(stat = "identity")
+p <- p + geom_text(hjust = -0.1, size = 6.5)
+p <- p + scale_y_continuous(
+  limits = c(0, 70),
+  breaks = seq(0, 60, by = 20))
+p <- p + labs(
+  title = "~50% of Australians aged 85+ reported 0 min of\nphysical activity in the last week",
+  caption = "Source: National Health Survey 2017–2018",
+  x = NULL, y = NULL)
+
+p
+
+```
+
+---
+
+## Tailor the colour scheme
+
+``` {r demo2_build_plot_part7, eval = FALSE}
+
+p <- p + scale_fill_brewer(palette = "RdBu", direction = -1)
+
+```
+
+---
+
+``` {r demo2_display_plot_part5, echo = FALSE, fig.width = 16, fig.height = 8.5}
+
+p <- ggplot(activity_data_long,
+            aes(x = duration, y = pct_of_resp,
+                fill = duration,
+                label = paste0(pct_of_resp, "%")))
+p <- p + facet_wrap(vars(segment))
+p <- p + geom_bar(stat = "identity")
+p <- p + geom_text(hjust = -0.1, size = 6.5)
+p <- p + scale_y_continuous(
+  limits = c(0, 70),
+  breaks = seq(0, 60, by = 20))
+p <- p + labs(
+  title = "~50% of Australians aged 85+ reported 0 min of\nphysical activity in the last week",
+  caption = "Source: National Health Survey 2017–2018",
+  x = NULL, y = NULL)
+p <- p + scale_fill_brewer(palette = "RdBu", direction = -1)
+
+p
+
+```
+
+---
+
+## 'Swap' X and Y axes
+
+``` {r demo2_build_plot_part8, eval = FALSE}
+
+p <- p + coord_flip()
+
+```
+
+---
+
+``` {r demo2_display_plot_part6, echo = FALSE, fig.width = 16, fig.height = 8.5}
+
+p <- ggplot(activity_data_long,
+            aes(x = duration, y = pct_of_resp,
+                fill = duration,
+                label = paste0(pct_of_resp, "%")))
+p <- p + facet_wrap(vars(segment))
+p <- p + geom_bar(stat = "identity")
+p <- p + geom_text(hjust = -0.1, size = 6.5)
+p <- p + scale_y_continuous(
+  limits = c(0, 70),
+  breaks = seq(0, 60, by = 20))
+p <- p + labs(
+  title = "~50% of Australians aged 85+ reported 0 min of\nphysical activity in the last week",
+  caption = "Source: National Health Survey 2017–2018",
+  x = NULL, y = NULL)
+p <- p + scale_fill_brewer(palette = "RdBu", direction = -1)
+p <- p + coord_flip()
+
+p
+
+```
+
+---
+
+## Set theme aesthetics
+
+``` {r demo2_build_plot_part9a, eval = FALSE}
+
+p <- p + theme( #<<
+  text = element_text(size = 28),
+  legend.position = "none",
+  plot.title = element_text(margin = margin(b = 15, unit = "pt")),
+  axis.title.x = element_text(margin = margin(t = 15, unit = "pt")),
+  axis.title.y = element_text(margin = margin(r = 15, unit = "pt")))
+
+```
+
+---
+
+## Set theme aesthetics
+
+``` {r demo2_build_plot_part9b, eval = FALSE}
+
+p <- p + theme(
+  text = element_text(size = 28), #<<
+  legend.position = "none",
+  plot.title = element_text(margin = margin(b = 15, unit = "pt")),
+  axis.title.x = element_text(margin = margin(t = 15, unit = "pt")),
+  axis.title.y = element_text(margin = margin(r = 15, unit = "pt")))
+
+```
+
+---
+
+## Set theme aesthetics
+
+``` {r demo2_build_plot_part9c, eval = FALSE}
+
+p <- p + theme(
+  text = element_text(size = 28),
+  legend.position = "none", #<<
+  plot.title = element_text(margin = margin(b = 15, unit = "pt")),
+  axis.title.x = element_text(margin = margin(t = 15, unit = "pt")),
+  axis.title.y = element_text(margin = margin(r = 15, unit = "pt")))
+
+```
+
+---
+
+## Set theme aesthetics
+
+``` {r demo2_build_plot_part9d, eval = FALSE}
+
+p <- p + theme(
+  text = element_text(size = 28),
+  legend.position = "none",
+  plot.title = element_text(margin = margin(b = 15, unit = "pt")),   #<<
+  axis.title.x = element_text(margin = margin(t = 15, unit = "pt")), #<<
+  axis.title.y = element_text(margin = margin(r = 15, unit = "pt"))) #<<
+
+```
+
+---
+
+``` {r demo2_display_plot, echo = FALSE, fig.width = 16, fig.height = 8.5}
 
 library(ggplot2)
 
@@ -1594,9 +2311,9 @@ p <- ggplot(activity_data_long,
                 label = paste0(pct_of_resp, "%")))
 p <- p + facet_wrap(vars(segment))
 p <- p + geom_bar(stat = "identity")
-p <- p + geom_text(hjust = -0.2)
+p <- p + geom_text(hjust = -0.1, size = 6.5)
 p <- p + scale_y_continuous(
-  limits = c(0, 65),
+  limits = c(0, 70),
   breaks = seq(0, 60, by = 20))
 p <- p + labs(
   title = "~50% of Australians aged 85+ reported 0 min of\nphysical activity in the last week",
@@ -1606,7 +2323,10 @@ p <- p + scale_fill_brewer(palette = "RdBu", direction = -1)
 p <- p + coord_flip()
 p <- p + theme(
   text = element_text(size = 28),
-  legend.position = "none")
+  legend.position = "none",
+  plot.title = element_text(margin = margin(b = 15, unit = "pt")),
+  axis.title.x = element_text(margin = margin(t = 15, unit = "pt")),
+  axis.title.y = element_text(margin = margin(r = 15, unit = "pt")))
 
 # Display plot
 p
@@ -1620,6 +2340,12 @@ class: inverse, center, middle
 ## Resources to get you started
 
 ---
+
+- [**Data organisation in spreadsheets**](https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1375989)
+
+  Karl Broman & Kara Woo, 2018, *The American Statistician*, *72*(1).
+
+--
 
 - [**Installing R and RStudio**](https://rstudio-education.github.io/hopr/starting.html)
 

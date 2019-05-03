@@ -173,3 +173,10 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
     left: 0 !important;
   }
 }
+
+
+/* Extra CSS */
+.title-slide {
+  background-image: url(https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/titlebg.jpg);
+  background-size: cover;
+}
