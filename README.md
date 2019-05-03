@@ -2,6 +2,8 @@
 
 This repo includes all materials used in my presentation on **'Using data analytics to investigate, understand, and solve problems in exercise and sport'**, delivered at the 2019 Exercise & Sport Science Australia (ESSA) Forum (4 May 2019).
 
+[**Click here to view the presentation slides.**](https://jacquietran.github.io/2019_essa_forum/R/)
+
 ## Abstract
 
 How can analytics be applied to better understand our clients, our patients, our athletes, our coaches? How can data be used to support better decision-making by exercise and sport professionals? What are some key data skills and competencies that exercise and sport professionals can develop to serve current and emerging industry needs?
