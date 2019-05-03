@@ -2372,10 +2372,7 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-# Thanks!
-
-Presentation slides here:
-[**LINK TO SLIDES GOES HERE**]()
+![](https://raw.githubusercontent.com/jacquietran/2019_essa_forum/master/images/tenor.gif)
 
 Full suite of materials (code, data) online:  
 [**https://github.com/jacquietran/2019_essa_forum**](https://github.com/jacquietran/2019_essa_forum)
